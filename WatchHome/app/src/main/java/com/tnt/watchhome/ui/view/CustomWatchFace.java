@@ -188,7 +188,21 @@ public class CustomWatchFace extends View {
                 mWidth,mHeight);
         mDial.draw(canvas);
         canvas.save();*/
+
+
         canvas.drawBitmap(mBackgroundBitmap, 0, 0, mBackgroundPaint);
+
+       // canvas.rotate(mHour / 12.0F * 360.0F, mWidth/2, mHeight/2);
+
+        int hourHandwidth = mHourHand.getIntrinsicWidth() ;
+        int hourhandHeight = mHourHand.getIntrinsicHeight() ;
+        mHourHand.setBounds(mWidth/2 -hourHandwidth/2,mHeight/2-hourhandHeight/2,
+                mWidth/2+hourHandwidth/2,mHeight/2+hourhandHeight/2) ;
+        mHourHand.draw(canvas);
+        canvas.restore() ;
+
+
+
 
         
 
@@ -200,6 +214,7 @@ public class CustomWatchFace extends View {
     private void drawBackground() {
 
     }
+
 
     // index 0 : width  index 1 : height
     private int[] getScreenWidth() {
