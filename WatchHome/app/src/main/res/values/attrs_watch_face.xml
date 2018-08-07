@@ -1,0 +1,42 @@
+<resources>
+    <declare-styleable name="AnologWatchFace">
+        <attr name="viewSize" format="dimension"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="secondlineColor" format="color"/>
+        <attr name="hourlineColor" format="color"/>
+        <attr name="minutelineColor" format="color"/>
+        <attr name="textColor" format="color"/>
+
+        <attr name="hourlinePaintStrockwidth" format="dimension"/>
+        <attr name="minutelinePaintStrockwidth" format="dimension"/>
+        <attr name="secondlinePaintStrockwidth" format="dimension"/>
+        <attr name="borderlinePaintStrockwidth" format="dimension"/>
+
+        <attr name="mRadius" format="dimension"/>
+        <attr name="mCircleColor" format="color"/>
+        <attr name="mCircleWidth" format="dimension"/>
+        <attr name="mTextSize" format="dimension"/>
+        <attr name="mTextColor" format="color"/>
+        <attr name="mBigScaleColor" format="color"/>
+        <attr name="mMiddlecaleColor" format="color"/>
+        <attr name="mSmallScaleColor" format="color"/>
+        <attr name="mHourHandColor" format="color"/>
+        <attr name="mMinuteHandColor" format="color"/>
+        <attr name="mSecondHandColor" format="color"/>
+        <attr name="mHourHandWidth" format="dimension"/>
+        <attr name="mMinuteHandWidth" format="dimension"/>
+        <attr name="mSecondHandWidth" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="CustomeWatch">
+        <attr name="dial" format="reference"/>
+        <attr name="hourHand" format="reference"/>
+        <attr name="minteHand" format="reference"/>
+        <attr name="secondHand" format="reference"/>
+        <attr name="blackPonit" format="reference"/>
+
+    </declare-styleable>
+</resources>

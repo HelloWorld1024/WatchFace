@@ -5,9 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
-
+<!--
 <com.tnt.watchhome.ui.view.AnologWatchFace
+    app:mSecondHandColor="@color/colorAccent"
+    app:mCircleColor="@android:color/darker_gray"
+    app:mBigScaleColor="@android:color/white"
+    app:mMiddlecaleColor="@android:color/white"
+    app:mSmallScaleColor="@android:color/black"
+    app:mHourHandColor="@android:color/white"
+    app:mMinuteHandColor="@android:color/white"
+    app:mTextColor="@android:color/black"
+    app:mHourHandWidth="10dp"
+    app:mSecondHandWidth="5dp"
+    app:mMinuteHandWidth="7dp"
+    app:mTextSize="10sp"
+    android:layout_centerInParent="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
-
+-->
+    <com.tnt.watchhome.ui.view.CustomWatchFace
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

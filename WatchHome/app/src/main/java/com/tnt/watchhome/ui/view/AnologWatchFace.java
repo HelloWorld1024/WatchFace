@@ -8,6 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -27,428 +29,288 @@ import java.util.Calendar;
 public class AnologWatchFace extends View {
     private static final String TAG = "watchface";
 
-    private static final float CENTER_GAP_AND_CIRCLE_RADIUS = 4f;
+    //handler what
+    public final int START_CLOCK=1000;
 
-    private static final int SHADOW_RADIUS = 6;
+    //文字画笔对象
+    private  Paint mTextPaint;
 
-    private static final double ROUND = 2 * Math.PI ;
-    private static final double QUARTER = Math.PI/4 ;
+    //圆，指针，刻度画笔
+    private  Paint mPaint;
 
-    private float mCenterX;
-    private float mCenterY;
-    private float mSecondHandLength;
-    private float mMinuteHandLength;
-    private float mHourHandLength;
+    //半径
+    public float mRadius;
 
-    private float mHourDegreeLength ;
-    private float mSecondDegreeLength ;
+    //外圆的颜色
+    public int mCircleColor;
 
+    // 外圆的宽度
+    public float mCircleWidth;
 
-    private float mRadius ;
+    //文字的大小
+    public float mTextSize;
 
+    //文字的颜色
+    public int mTextColor;
 
-    private float mHourLineStrockWidth ;
-    private float mMinLineStrockWidth ;
-    private float mSecondLineStrockWidth ;
+    //大刻度颜色
+    public int mBigScaleColor;
 
+    //中刻度
+    public int mMiddlecaleColor;
 
-    private int mSize ;
-    private int mWidth ;
-    private int mHeight ;
+    //小刻度颜色
+    public int mSmallScaleColor;
 
-    private int mBorderColor ;
+    //时针颜色
+    public int mHourHandColor;
 
-    private int mBackgroundColor ;
+    //分针颜色
+    public int mMinuteHandColor;
 
-    private int mTextColor;
+    //秒针颜色
+    public int mSecondHandColor;
 
-    private int mTextSize ;
+    //时针宽度
+    public float mHourHandWidth;
 
-    private int mHourHandColor ;
+    //分针宽度
+    public float mMinuteHandWidth;
 
-    private int mMinHandColor ;
+    //秒针宽度
+    public float mSecondHandWidth;
 
-    private int mSecondHandColor ;
+    //控件宽度
+    public int mWidth;
 
-
-
-    /* Colors for all hands (hour, minute, seconds, ticks) based on photo loaded. */
-
-    private int mWatchHandHighlightColor;
-    private int mWatchHandShadowColor;
-
-
-    private Calendar mCalendar ;
-    private Paint mHourPaint;
-    private Paint mMinutePaint;
-    private Paint mSecondPaint;
-    private Paint mTickAndCirclePaint;
-    private Paint mBackgroundPaint;
-
-    private Paint mTextPaint ;
-
-    private Bitmap mBackgroundBitmap;
-    private Bitmap mGrayBackgroundBitmap;
-
-    private boolean mAmbient;
-    private boolean mLowBitAmbient;
-    private boolean mBurnInProtection;
-
-
-    //default values (color  background)
-    private static final int DEFAULT_BACKGOURN_COLOR = Color.BLACK ;
-
+    //控件高度
+    public int mHeght;
 
     public AnologWatchFace(Context context) {
-        super(context);
-        init(context,null, 0);
+        this(context,null);
     }
 
     public AnologWatchFace(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context,attrs, 0);
+        this(context, attrs,0);
     }
 
-    public AnologWatchFace(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context,attrs, defStyle);
+    public AnologWatchFace(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initAttrs(context,attrs) ;
     }
 
-    private void init(Context context , AttributeSet attrs, int defStyle) {
-        mCalendar = Calendar.getInstance() ;
-        initDefaultValue();
-        initializeBackground() ;
-        initializeWatchFace() ;
-
-        initAttributeSet(context,attrs,defStyle,0);
-
-    }
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-    }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-       // int newSpec = MeasureSpec.makeMeasureSpec(mSize,MeasureSpec.getMode(Math.min(widthMeasureSpec,heightMeasureSpec)));
-        //Log.i(TAG,"onMessure  width = "+widthMeasureSpec + " height = "+heightMeasureSpec) ;
-        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
-
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec) ;
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec) ;
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec) ;
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
-        int desiredWidth, desiredHeight ;
-        if(widthMode == MeasureSpec.EXACTLY){
-            desiredWidth = widthSize ;
-        }else {
-            desiredWidth = (int)mRadius * 2 + getPaddingLeft()+getPaddingRight() ;
-            if (widthMode == MeasureSpec.AT_MOST){
-                desiredWidth = Math.min(widthSize,desiredWidth) ;
-            }
-        }
-
-        if (heightMode == MeasureSpec.EXACTLY){
-            desiredHeight = heightSize ;
-        }else {
-            desiredHeight = (int)mRadius*2 + getPaddingTop() + getPaddingBottom() ;
-            if (heightMode == MeasureSpec.AT_MOST) {
-                desiredHeight = Math.min(heightSize,desiredHeight) ;
-            }
-        }
-
-        setMeasuredDimension(mWidth=desiredWidth, mHeight=desiredHeight);
-        calculateLengths();
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(measureSize(widthMeasureSpec),measureSize(heightMeasureSpec));
     }
 
-    // index 0 : width  index 1 : height
-    private int[] getScreenWidth() {
-        int [] width_height = new int[2];
-        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics displayMetrics = new DisplayMetrics() ;
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        width_height[0] = displayMetrics.widthPixels ;
-        width_height[1] = displayMetrics.heightPixels ;
-        Log.i(TAG,"width = "+width_height[0]+" height = "+width_height[1]) ;
-        return width_height ;
+    private void initAttrs(Context context,AttributeSet attrs){
+        TypedArray typedArray=context.obtainStyledAttributes(attrs, R.styleable.AnologWatchFace);
+        mRadius=typedArray.getDimension(R.styleable.AnologWatchFace_mRadius,400);
+        mCircleColor=typedArray.getColor(R.styleable.AnologWatchFace_mCircleColor, Color.WHITE);
+        mCircleWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mCircleWidth,5);
+        mTextSize=typedArray.getDimension(R.styleable.AnologWatchFace_mCircleWidth,10);
+        mTextColor=typedArray.getColor(R.styleable.AnologWatchFace_mTextColor,Color.DKGRAY);
+        mBigScaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mBigScaleColor,Color.BLACK);
+        mSmallScaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mSmallScaleColor,Color.RED);
+        mMiddlecaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mMiddlecaleColor,Color.BLACK);
+        mHourHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mHourHandColor,Color.BLACK);
+        mMinuteHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mMinuteHandColor,Color.BLACK);
+        mSecondHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mSecondHandColor,Color.BLACK);
+        mHourHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mHourHandWidth,20);
+        mMinuteHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mMinuteHandWidth,10);
+        mSecondHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mSecondHandWidth,5);
+
+        mPaint=new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.STROKE);
+
+        mTextPaint=new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setStyle(Paint.Style.STROKE);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(mTextColor);
+
     }
 
+    private int measureSize(int mMeasureSpec) {
+        int result;
+        int mode=MeasureSpec.getMode(mMeasureSpec);
+        int size=MeasureSpec.getSize(mMeasureSpec);
+        if(mode==MeasureSpec.EXACTLY){
+            result=size;
+        }else{
+            result=400;
+            if(mode==MeasureSpec.AT_MOST){
+                result=Math.min(result,size);
+            }
+        }
+        return  result;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i(TAG,"test") ;
-
-        /* google default
-        final float seconds = (mCalendar.get(Calendar.SECOND) + mCalendar.get(Calendar.MILLISECOND) / 1000f);
-        final float secondsRotation = seconds * 6f;
-        final float minutesRotation = mCalendar.get(Calendar.MINUTE) * 6f;
-        final float hourHandOffset = mCalendar.get(Calendar.MINUTE) / 2f;
-        final float hoursRotation = (mCalendar.get(Calendar.HOUR) * 30) + hourHandOffset;
-        */
-        float millis = mCalendar.get(Calendar.MILLISECOND) / 1000f;
-        float second = (mCalendar.get(Calendar.SECOND) + millis) / 60f;
-        float minute = (mCalendar.get(Calendar.MINUTE) + second) / 60f;
-        float hour = (mCalendar.get(Calendar.HOUR) + minute) / 12f;
-
-        Log.i(TAG,"millis ="+millis +" second"+second+" minute = "+minute+"hour = "+hour) ;
-        Log.i(TAG,"radiu"+mRadius +"") ;
-        drawDegreeLine(canvas);
-        drawHourNumbers(canvas);
-        drawHand(canvas,mHourPaint,mHourHandLength,hour);
-        drawHand(canvas,mMinutePaint,mMinuteHandLength,minute);
-        drawHand(canvas,mSecondPaint,mSecondHandLength,second);
-
-    }
-    private void drawWatchCircle(){
-
+        //设置宽高、半径
+        mWidth=getMeasuredWidth()-getPaddingLeft()-getPaddingRight();
+        mHeght=getMeasuredHeight()-getPaddingBottom()-getPaddingTop();
+        mRadius=Math.min(mWidth/2,mHeght/2);
+        //绘制圆
+        drawCircle(canvas);
+        //绘制刻度
+        drawScale(canvas);
+        // drawHourNumbers(canvas);
+        //绘制指针
+        drawPointer(canvas);
+        //发送消息刷新ui
+        handler.sendEmptyMessageDelayed(START_CLOCK,1000);
     }
 
-    private void drawDegreeLine(Canvas canvas) {
-        int i ;
-        canvas.translate(mWidth * 1.0f / 2 , mHeight * 1.0f / 2 );
-        mTextPaint.setStrokeWidth(2f);
-        for(i = 1 ; i < 13 ; i++){
-            canvas.save() ;
-            canvas.drawLine(0,mRadius,0,mRadius -mHourDegreeLength,mTextPaint);
-            canvas.rotate(30);
+    /**
+     * 画圆
+     * @param canvas
+     */
+    private void drawCircle(Canvas canvas) {
+        mPaint.setStrokeWidth(mCircleWidth);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(mCircleColor);
+        canvas.drawCircle(mWidth/2,mHeght/2,mRadius,mPaint);
+    }
 
-        }
-        mTextPaint.setStrokeWidth(1.0f);
-        for (i =0 ; i < 60 ; i++){
-            canvas.save();
-            if(i % 5 !=0){
-                canvas.drawLine(0,mRadius,0,mRadius -mSecondDegreeLength,mTextPaint);
+    /**
+     * 刻度和文字
+     * @param canvas
+     */
+    private void drawScale(Canvas canvas) {
+
+        for (int i=0;i<60;i++){
+            //设置大刻度
+            if(i==0||i==15||i==30||i==45){
+                mPaint.setStrokeWidth(6);
+                mPaint.setColor(mBigScaleColor);
+                canvas.drawLine(mWidth/2,mHeght/2-mWidth/2+mCircleWidth/2,
+                        mWidth/2,mHeght/2-mWidth/2+mCircleWidth/2+30,mPaint);
+                //String scaleTv=String.valueOf(i==0?12:i/5);
+                //canvas.drawText(scaleTv,mWidth/2-mTextPaint.measureText(scaleTv)/2,
+                //       mHeght/2-mWidth/2+mCircleWidth/2+95,mTextPaint);
+            }else if (i==5||i==10||i==20||i==25||i==35||i==40||i==50||i==55)
+            //设置中刻度
+            {
+                mPaint.setStrokeWidth(4);
+                mPaint.setColor(mMiddlecaleColor);
+                canvas.drawLine(mWidth/2,mHeght/2-mWidth/2+mCircleWidth/2,
+                        mWidth/2,mHeght/2-mWidth/2+mCircleWidth/2+25,mPaint);
+                String scaleTv=String.valueOf(i/5);
+                //canvas.drawText(scaleTv,mWidth/2-mTextPaint.measureText(scaleTv)/2,
+                //      mHeght/2-mWidth/2+mCircleWidth/2+75,mTextPaint);
+
+            }else
+            //设置小刻度
+            {
+               /* mPaint.setColor(mSmallScaleColor);
+                mPaint.setStrokeWidth(2);
+                canvas.drawLine(mWidth/2,mHeght/2-mWidth/2+mCircleWidth/2,
+                        mWidth/2,mHeght/2-mWidth/2+mCircleWidth+10,mPaint);*/
             }
-            canvas.rotate(6);
+            canvas.rotate(6,mWidth/2,mHeght/2);
         }
+    }
+
+
+    /**
+     * 绘制指针
+     * @param canvas
+     */
+    private void drawPointer(Canvas canvas) {
+        Calendar mCalendar=Calendar.getInstance();
+        //获取当前小时数
+        int hours = mCalendar.get(Calendar.HOUR);
+        //获取当前分钟数
+        int minutes = mCalendar.get(Calendar.MINUTE);
+        //获取当前秒数
+        int seconds=mCalendar.get(Calendar.SECOND);
+
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        //绘制时针
+        canvas.save();
+        mPaint.setColor(mHourHandColor);
+        mPaint.setStrokeWidth(mHourHandWidth);
+        float y1 = mHeght / 2 - mWidth/2f*0.5f;
+        Log.i(TAG," width = "+mWidth+"  height="+mHeght+"  y1="+y1) ;
+        //旋转的角度 实现原理是计算出一共多少分钟除以60计算出真实的小时数（带有小数，为了更加准确计算度数），已知12小时是360度，现在求出了实际小时数比例求出角度
+        Float hoursAngle = (hours * 60 + minutes) / 60f / 12f  * 360;
+        canvas.rotate(hoursAngle, mWidth / 2, mHeght / 2);
+        canvas.drawLine(mWidth / 2, mHeght / 2 - mWidth/2f*0.5f, mWidth / 2, mHeght / 2 +  mWidth/2f*0.15f, mPaint);
+        canvas.restore();
+
+
+        //绘制分针
+        canvas.save();
+        mPaint.setColor(mMinuteHandColor);
+        mPaint.setStrokeWidth(mMinuteHandWidth);
+        //计算分针需要旋转的角度  60分钟360度，求出实际分钟数所占的度数
+        Float minutesAngle = (minutes*60+seconds) / 60f/ 60f * 360;
+        canvas.rotate(minutesAngle, mWidth / 2, mHeght / 2);
+        canvas.drawLine(mWidth / 2, mHeght / 2 -  mWidth/2f*0.7f, mWidth / 2, mHeght / 2 +  mWidth/2f*0.15f, mPaint);
+        canvas.restore();
+
+        //绘制中间的圆圈
+        canvas.save();
+        mPaint.setColor(mSecondHandColor);
+        mPaint.setStrokeWidth(mSecondHandWidth);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(mWidth/2,mHeght/2,5,mPaint);
+        canvas.restore();
+
+
+        //绘制秒针
+        canvas.save();
+        mPaint.setColor(mSecondHandColor);
+        mPaint.setStrokeWidth(mSecondHandWidth);
+        mPaint.setStyle(Paint.Style.STROKE);
+        //计算秒针需要旋转的角度  60秒360度，求出实际秒数所占的度数
+        Float secondAngle = seconds/60f*360;
+        canvas.rotate(secondAngle, mWidth / 2, mHeght / 2);
+        canvas.drawLine(mWidth / 2, mHeght / 2 -  mWidth/2f*0.8f, mWidth / 2, mHeght / 2 +  mWidth/2f*0.2f, mPaint);
+        canvas.restore();
+
 
     }
 
     private void drawHourNumbers(Canvas canvas){
+
         for (int i =0 ; i < 12 ; i++){
             canvas.save() ;
             String number = 6 + i < 12 ? String.valueOf(6+i):(6+i)>12 ? String.valueOf(i-6) : "12" ;
             canvas.translate(0,mRadius*5.5f/7);
             canvas.rotate(-i*30);
-            canvas.drawText(number,0,0 ,mTextPaint);
+            canvas.drawText(number,mRadius,mRadius*5.5f/7 ,mTextPaint);
             canvas.restore();
             canvas.rotate(30);
 
         }
 
-
-
     }
 
-
-
-    //draw hand path .choose to use
-    private int[] getPointerCoordinates(int pointerLength) {
-        int y = (int) (pointerLength * 3.0f / 4);
-        int x = (int) (y * Math.tan(Math.PI / 180 * 5));
-        return new int[]{-x, y, 0, pointerLength, x, y};
-    }
-
-    private void drawHand(Canvas canvas,Paint paint
-                          ,float lenth,float round){
-        double radians = (round - QUARTER ) * ROUND ;
-        canvas.drawLine(0, 0,
-                (float)Math.cos(radians)*lenth,
-                (float)Math.sin(radians)*lenth,
-                paint);
-    }
-
-
-
-    private void drawHandGoogleDefault(Canvas canvas,float rotation,
-                                       float handLength,Paint paint){
-        canvas.save() ;
-        canvas.rotate(rotation,mCenterX,mCenterY);
-        canvas.drawLine(mCenterX,mCenterY - CENTER_GAP_AND_CIRCLE_RADIUS,
-                mCenterX,
-                mCenterY -handLength,
-                paint);
-
-
-    }
-
-    //test later
-    private void drawCircleTick(Canvas canvas){
-        canvas.save() ;
-        canvas.drawCircle(
-                mCenterX,
-                mCenterY,
-                CENTER_GAP_AND_CIRCLE_RADIUS,
-                mTickAndCirclePaint);
-
-    }
-
-
-
-
-    private void initDefaultValue() {
-        mAmbient = false ;
-        mBorderColor = Color.BLACK;
-        mBackgroundColor = Color.GRAY ;
-        mSecondHandColor = Color.RED ;
-        mMinHandColor = Color.BLACK;
-        mHourHandColor = Color.BLACK ;
-        mTextColor = Color.BLACK ;
-        mTextSize = 22 ;
-        mHourLineStrockWidth = 5f ;
-        mMinLineStrockWidth = 3f ;
-        mSecondLineStrockWidth = 2f ;
-
-        mWidth = getWidth() ;
-        mHeight = getHeight() ;
-        mRadius = mWidth /2 ;
-
-        mCenterX = getWidth() /2 ;
-        mCenterY = getHeight() / 2;
-
-        Log.i(TAG,"radius = "+mRadius) ;
-
-        mWidth = getScreenWidth()[0] ;
-        mHeight = getScreenWidth()[1] ;
-        mCenterX = mWidth/2  ;
-        mCenterY = mHeight /2 ;
-        mSize = mWidth ;
-        mRadius = mWidth /2 ;
-        mRadius = 100 ;
-
-        Log.i(TAG,"radius = "+mRadius +"width = "+mWidth) ;
-
-
-
-    }
-    private void initAttributeSet(Context context,AttributeSet attrs,int defStyle,int defStyleRes){
-        final TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.AnologWatchFace,defStyle,defStyleRes);
-
-        mSize = typedArray.getDimensionPixelSize(R.styleable.AnologWatchFace_viewSize,mSize) ;
-        mBorderColor = typedArray.getColor(R.styleable.AnologWatchFace_borderColor,mBorderColor);
-        mBackgroundColor = typedArray.getColor(R.styleable.AnologWatchFace_backgroundColor,mBackgroundColor);
-        mSecondHandColor = typedArray.getColor(R.styleable.AnologWatchFace_secondlineColor,mSecondHandColor);
-        mMinHandColor = typedArray.getColor(R.styleable.AnologWatchFace_minutelineColor,mMinHandColor);
-        mHourHandColor = typedArray.getColor(R.styleable.AnologWatchFace_hourlineColor,mHourHandColor) ;
-
-        mTextSize = typedArray.getDimensionPixelSize(R.styleable.AnologWatchFace_textSize,mTextSize) ;
-        mTextColor = typedArray.getColor(R.styleable.AnologWatchFace_textColor,mTextColor) ;
-        mHourLineStrockWidth = typedArray.getDimensionPixelSize(R.styleable.AnologWatchFace_hourlinePaintStrockwidth,(int)mHourLineStrockWidth);
-        mMinLineStrockWidth = typedArray.getDimensionPixelSize(R.styleable.AnologWatchFace_minutelinePaintStrockwidth,(int)mMinLineStrockWidth) ;
-        mSecondLineStrockWidth = typedArray.getDimensionPixelSize(R.styleable.AnologWatchFace_secondlinePaintStrockwidth,(int)mSecondLineStrockWidth);
-        typedArray.recycle();
-    }
-
-    private void initializeBackground() {
-        mBackgroundPaint = new Paint() ;
-        mBackgroundPaint.setColor(DEFAULT_BACKGOURN_COLOR);
-        mBackgroundBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.bg_watcherboard) ;
-
-        /*Extracts colors from background image to improve watchface style*/
-        Palette.from(mBackgroundBitmap).generate(new Palette.PaletteAsyncListener(){
-
-            @Override
-            public void onGenerated(Palette palette) {
-                if(null != palette){
-                    mWatchHandHighlightColor = palette.getVibrantColor(Color.RED) ;
-                    mHourHandColor = palette.getLightVibrantColor(Color.WHITE) ;
-                    mWatchHandShadowColor = palette.getDarkMutedColor(Color.BLACK) ;
-                    updateWatchHandStyle() ;
-                }
+    /**
+     * handler处理
+     */
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case START_CLOCK:
+                    //更新时分秒
+                    invalidate();
+                    //每隔1秒更新一次
+                    handler.sendEmptyMessageDelayed(START_CLOCK,1000);
+                    break;
             }
-        });
-    }
 
-    private void initializeWatchFace(){
-        /* Set defaults for colors */
-        mWatchHandHighlightColor = Color.RED;
-        mWatchHandShadowColor = Color.BLACK;
-
-        mHourPaint = new Paint();
-        mHourPaint.setColor(mHourHandColor);
-        mHourPaint.setStrokeWidth(mHourLineStrockWidth);
-        mHourPaint.setAntiAlias(true);
-        mHourPaint.setStrokeCap(Paint.Cap.ROUND);
-        mHourPaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-
-        mMinutePaint = new Paint();
-        mMinutePaint.setColor(mMinHandColor);
-        mMinutePaint.setStrokeWidth(mMinLineStrockWidth);
-        mMinutePaint.setAntiAlias(true);
-        mMinutePaint.setStrokeCap(Paint.Cap.ROUND);
-        mMinutePaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-
-        mSecondPaint = new Paint();
-        mSecondPaint.setColor(mWatchHandHighlightColor);
-        mSecondPaint.setStrokeWidth(mSecondLineStrockWidth);
-        mSecondPaint.setAntiAlias(true);
-        mSecondPaint.setStrokeCap(Paint.Cap.ROUND);
-        mSecondPaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-
-        mTickAndCirclePaint = new Paint();
-        mTickAndCirclePaint.setColor(mMinHandColor);
-        mTickAndCirclePaint.setStrokeWidth(mHourLineStrockWidth);
-        mTickAndCirclePaint.setAntiAlias(true);
-        mTickAndCirclePaint.setStyle(Paint.Style.STROKE);
-        mTickAndCirclePaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-
-        mTextPaint = new Paint() ;
-        mTextPaint.setColor(Color.BLACK);
-        mTextPaint.setStrokeWidth(2);
-        mTextPaint.setAntiAlias(true);
-        mTextPaint.setStyle(Paint.Style.STROKE);
-
-    }
-
-    private void updateWatchHandStyle() {
-        if (mAmbient) {
-            mHourPaint.setColor(Color.WHITE);
-            mMinutePaint.setColor(Color.WHITE);
-            mSecondPaint.setColor(Color.WHITE);
-            mTickAndCirclePaint.setColor(Color.WHITE);
-
-            mHourPaint.setAntiAlias(false);
-            mMinutePaint.setAntiAlias(false);
-            mSecondPaint.setAntiAlias(false);
-            mTickAndCirclePaint.setAntiAlias(false);
-
-            mHourPaint.clearShadowLayer();
-            mMinutePaint.clearShadowLayer();
-            mSecondPaint.clearShadowLayer();
-            mTickAndCirclePaint.clearShadowLayer();
-
-        } else {
-            mHourPaint.setColor(mHourHandColor);
-            mMinutePaint.setColor(mMinHandColor);
-            mSecondPaint.setColor(mWatchHandHighlightColor);
-            mTickAndCirclePaint.setColor(mMinHandColor);// tick 使用跟minuteHand 同款颜色
-
-            mHourPaint.setAntiAlias(true);
-            mMinutePaint.setAntiAlias(true);
-            mSecondPaint.setAntiAlias(true);
-            mTickAndCirclePaint.setAntiAlias(true);
-
-            mHourPaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-            mMinutePaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-            mSecondPaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
-            mTickAndCirclePaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
         }
-    }
-
-    private void calculateLengths() {
-        //设置时针长度为半径的1/7
-        mHourDegreeLength =  (int)(mRadius * 1.0f / 7);
-        // 秒分刻度长度为时刻度长度的一半
-        mSecondDegreeLength = (int)(mHourDegreeLength * 1.0f / 2);
-
-        //设置指针的长度
-        mHourHandLength =  (int) (mRadius * 1.0 / 2);
-        mMinuteHandLength =  mHourHandLength * 1.25f;
-        mSecondHandLength =  mHourHandLength * 1.5f;
-    }
-
+    };
 
 
 

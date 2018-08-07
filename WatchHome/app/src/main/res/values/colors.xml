@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorGolen">#708069</color>
+    <color name="golden">#808069</color>
+    <color name="dianqing">	#082E54</color>
 </resources>
