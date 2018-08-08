@@ -11,12 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.SurfaceView;
 import android.view.View;
-import android.support.v7.graphics.Palette;
-import android.view.WindowManager;
 
 import com.tnt.watchhome.R;
 
