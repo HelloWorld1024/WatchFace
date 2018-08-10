@@ -315,8 +315,8 @@ public class CustomWatchFace extends View {
 
         private WeakReference<CustomWatchFace> mCustomWactchFace ;
 
-        public UpdateTimeHandler(CustomWatchFace wactchFace){
-            mCustomWactchFace = new WeakReference<CustomWatchFace>(wactchFace);
+        public UpdateTimeHandler(CustomWatchFace watchFace){
+            mCustomWactchFace = new WeakReference<CustomWatchFace>(watchFace);
         }
 
         @Override
@@ -359,7 +359,7 @@ public class CustomWatchFace extends View {
         mDay = String.valueOf(mCalendar.get(Calendar.MONTH)+1)+" "+String.valueOf(mCalendar.get(Calendar.DATE));
         mWeek = String.valueOf(getDayofWeek(mCalendar.get(Calendar.DAY_OF_WEEK))) ;
 
-        mDate = mDay+" "+mWeek;
+        mDate = mDay+"  "+mWeek;
 
         Log.i(TAG,"hourdegree = "+mHourRotateDegrees+"  mMinuteDegreee = "+mMinuRotateDegrees+" mSecondDegree = "+mSecondRotateDegrees) ;
 

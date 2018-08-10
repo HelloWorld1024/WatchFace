@@ -37,10 +37,7 @@
         <attr name="minteHand" format="reference"/>
         <attr name="secondHand" format="reference"/>
         <attr name="blackPonit" format="reference"/>
-
         <attr name="textsize" format="dimension"/>
-
         <attr name="textcolor" format="color"/>
-
     </declare-styleable>
 </resources>
