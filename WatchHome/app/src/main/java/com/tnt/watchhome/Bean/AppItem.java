@@ -1,25 +1,24 @@
 package com.tnt.watchhome.Bean;
 
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class AppItem {
-    ImageView image ;
-    TextView appTitle ;
 
     int imageId ;
     int appTitleId ;
 
-    public void setImage(ImageView image ){
-        this.image = image ;
+    public AppItem(){
+
     }
+
+    public AppItem(int imageId,int titleId){
+        this.imageId = imageId ;
+        this.appTitleId = titleId ;
+    }
+
     public void setImageId (int imageId) {
         this.imageId = imageId ;
     }
 
-    public void setAppTitle(TextView tv){
-        this.appTitle = tv ;
-    }
     public void setAppTitleId(int appTitleId){
         this.appTitleId = appTitleId ;
     }

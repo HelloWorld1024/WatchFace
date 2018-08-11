@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements WatchFragment.OnF
         return  0  ;
     }
 
+
+
+
     @Override
     public void onFragmentInteraction(Bundle bundle) {
         Log.i(TAG,"onFragmentInteraction = watch interaction") ;

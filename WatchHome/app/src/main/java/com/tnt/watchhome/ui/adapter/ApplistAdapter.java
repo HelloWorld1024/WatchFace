@@ -1,10 +1,10 @@
 package com.tnt.watchhome.ui.adapter;
-
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,65 +14,77 @@ import com.tnt.watchhome.R;
 
 import java.util.List;
 
-public class ApplistAdapter extends RecyclerView.Adapter<ApplistAdapter.ViewHolder> {
 
-    List<AppItem> mDataItems ;
+public class ApplistAdapter extends BaseAdapter {
+    private static final String TAG = "watch";
 
+    private List<AppItem> mListData ;
 
 
     public ApplistAdapter(List<AppItem> list){
-        mDataItems = list ;
+        mListData = list ;
+
     }
 
-
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main,parent,false);
+    public int getCount() {
+        return mListData.size();
+    }
 
-        ViewHolder viewHolder = new ViewHolder(view);
+    @Override
+    public Object getItem(int position) {
+        return mListData.get(position);
+    }
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final ViewHolder holder ;
+        if (null == convertView) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_list_item,parent,false);
+            holder = new ViewHolder() ;
+            holder.view = convertView ;
+            holder.image = convertView.findViewById(R.id.icon_image) ;
+            holder.textView = convertView.findViewById(R.id.app_name) ;
+            convertView.setTag(holder);
+            Log.i(TAG,"image = "+holder.view + " image = "+holder.image) ;
+
+
+        }else {
+            holder = (ViewHolder) convertView.getTag() ;
+            Log.i(TAG,"holer = "+holder) ;
+        }
+        AppItem item  = mListData.get(position);
+        holder.image.setImageResource(item.getImageId());
+        holder.textView.setText(item.getAppTitleId());
+        holder.textView.setVisibility(View.VISIBLE);
+        holder.image.setVisibility(View.VISIBLE);
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"start app",Toast.LENGTH_SHORT) ;
+
+                Log.i(TAG,"start app"+holder.textView.getText().toString()) ;
+
             }
         });
 
-        return viewHolder;
+        Log.i(TAG,"postion = "+position + "item name = "+holder.textView.getText().toString()) ;
+
+        return convertView;
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        AppItem appItem = mDataItems.get(position);
 
-        holder.iconImage.setImageResource(appItem.getImageId());
-        holder.appName.setText(appItem.getAppTitleId());
-
-
-
-
+    static class ViewHolder {
+        View view ;
+        ImageView image ;
+        TextView textView ;
     }
 
-    @Override
-    public int getItemCount() {
-        return mDataItems.size();
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder{
-
-        View itemView ;
-        ImageView iconImage  ;
-        TextView  appName ;
 
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            this.itemView = itemView ;
-            iconImage = itemView.findViewById(R.id.icon_image);
-            appName = itemView.findViewById(R.id.app_name);
-
-
-        }
-    }
 }

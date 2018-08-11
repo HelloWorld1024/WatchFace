@@ -3,12 +3,23 @@
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
+    <string name="thursday">Thursdaya</string>
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
 
-    <string name="application_name">应用名称</string>
+    <string name="application_name">Application name</string>
+    <string name="app_sport_name">Sport</string>
+    <string name="app_phone_name">Phone</string>
+    <string name="app_mms_name">Mms</string>
+    <string name="app_music_name">Music</string>
+    <string name="app_setpcount_name">StepCount</string>
+    <string name="app_heartrate">HeartRate</string>
+    <string name="app_sleep_name">Sleep</string>
+    <string name="app_map_name">Map</string>
+    <string name="app_weather_name">Weather</string>
+    <string name="app_tools_name">Tools</string>
+    <string name="app_settings_name">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

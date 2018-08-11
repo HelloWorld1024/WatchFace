@@ -64,8 +64,6 @@ public class CustomWatchFace extends View {
 
     private int mWidth;
     private int mHeight;
-    private float mCenterX;
-    private float mCenterY;
     private float mScale = 1;
     private float mRadius ;
 
@@ -160,7 +158,7 @@ public class CustomWatchFace extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        Log.i(TAG,"onMeasure") ;
+//        Log.i(TAG,"onMeasure") ;
 
         int widthSize = MeasureSpec.getSize(widthMeasureSpec) ;
         int widthMode = MeasureSpec.getMode(widthMeasureSpec) ;
@@ -192,7 +190,7 @@ public class CustomWatchFace extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.i(TAG,"onSizeChanged w = "+w + "h = "+h + "oldw = "+oldw + "oldh ="+oldh) ;
+//        Log.i(TAG,"onSizeChanged w = "+w + "h = "+h + "oldw = "+oldw + "oldh ="+oldh) ;
 
     }
 
@@ -218,7 +216,7 @@ public class CustomWatchFace extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i(TAG,"onDraw") ;
+//        Log.i(TAG,"onDraw") ;
 
         canvas.drawBitmap(mBackgroundBitmap, 0, 0, mBackgroundPaint);
         drawDateWeek(canvas);
@@ -330,7 +328,7 @@ public class CustomWatchFace extends View {
                     long timeMs = System.currentTimeMillis();
                     long delayMs =INTERACTIVE_UPDATE_RATE_MS
                             - (timeMs % INTERACTIVE_UPDATE_RATE_MS);
-                    Log.i(TAG,"delayMs = "+delayMs) ;
+//                    Log.i(TAG,"delayMs = "+delayMs) ;
                     sendEmptyMessageDelayed(watchFace.HANDLER_EVENT_UPDATE_TIME,delayMs);
 
                 }
@@ -361,11 +359,11 @@ public class CustomWatchFace extends View {
 
         mDate = mDay+"  "+mWeek;
 
-        Log.i(TAG,"hourdegree = "+mHourRotateDegrees+"  mMinuteDegreee = "+mMinuRotateDegrees+" mSecondDegree = "+mSecondRotateDegrees) ;
+//        Log.i(TAG,"hourdegree = "+mHourRotateDegrees+"  mMinuteDegreee = "+mMinuRotateDegrees+" mSecondDegree = "+mSecondRotateDegrees) ;
 
     }
     private String getDayofWeek(int weekday){
-        Log.i(TAG,"weekday = "+weekday) ;
+//        Log.i(TAG,"weekday = "+weekday) ;
         switch (weekday){
             case 1:
                 mWeek = getContext().getString(R.string.sunday);
