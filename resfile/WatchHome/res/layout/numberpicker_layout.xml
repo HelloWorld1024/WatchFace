@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.hmct.wearable.widget.WearNumberPicker android:layout_gravity="center_horizontal" android:id="@id/numberpicker_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <TextView android:textSize="24.0dip" android:textColor="#ffffdba7" android:layout_gravity="center_vertical" android:id="@id/label" android:layout_width="wrap_content" android:layout_height="wrap_content" />"
+</LinearLayout>
+    <com.hmct.wearable.widget.WearImageView android:layout_gravity="bottom|center" android:id="@id/numberpicker_image" android:background="@drawable/confirm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="0.0dip" />
+</LinearLayout>

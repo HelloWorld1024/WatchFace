@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.DelayedConfirmationView android:layout_gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" app:circle_color="@color/black" app:circle_radius="202.0dip" app:circle_radius_pressed="50.0dip" app:circle_border_width="1.0dip" app:circle_border_color="@color/white"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.qualcomm.qti.watchhome.top.notification.HmctScrollView android:id="@id/scroll" android:paddingTop="55.0dip" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="300.0dip" android:overScrollMode="ifContentScrolls">
+            <com.qualcomm.qti.watchhome.top.notification.views.NotificationRowLayout android:id="@id/latestItems" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.qualcomm.qti.watchhome.top.notification.HmctScrollView>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/null_notification_panel" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="28.0px" android:textColor="#ffffdba7" android:gravity="center" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/empty_shade_text" android:drawableTop="@drawable/null_notification_icon" />
+        </LinearLayout>
+        <com.hmct.wearable.widget.WearBottomSingleMenu android:layout_gravity="bottom|center" android:id="@id/clear_notification_image" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </FrameLayout>
+</android.support.wearable.view.DelayedConfirmationView>

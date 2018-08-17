@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/timePickerLayout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="0.0dip" android:paddingEnd="0.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="2.0" android:layoutDirection="ltr" android:paddingStart="0.0dip" android:paddingEnd="0.0dip">
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/divider2" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginTop="32.0dip" android:layout_marginBottom="32.0dip" android:layoutDirection="ltr">
+            <ImageView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+        </LinearLayout>
+        <com.hmct.wearable.widget.WearNumberPicker android:id="@id/hour" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <TextView android:textSize="24.0dip" android:textColor="#ffffdba7" android:layout_gravity="center_vertical" android:id="@id/hour_label" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout android:orientation="vertical" android:id="@id/devider_layout" android:layout_width="100.0dip" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/divider1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginTop="32.0dip" android:layout_marginBottom="32.0dip" android:layoutDirection="ltr">
+            <ImageView android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+        </LinearLayout>
+        <com.hmct.wearable.widget.WearNumberPicker android:id="@id/minute" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <TextView android:textSize="24.0dip" android:textColor="#ffffdba7" android:layout_gravity="center_vertical" android:id="@id/minute_label" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.hmct.wearable.widget.WearNumberPicker android:id="@id/amPm" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="2.0" />
+</LinearLayout>

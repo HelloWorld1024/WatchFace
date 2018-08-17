@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WearAppTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:buttonStyle">@style/Widget.Hmct.Wear.Button</item>
+        <item name="android:listPreferredItemHeight">90.0dip</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:checkboxStyle">@style/Widget.Hmct.Wear.CompoundButton.CheckBox</item>
+        <item name="android:imageButtonStyle">@style/Widget.Hmct.Wear.ImageButton</item>
+        <item name="android:listViewStyle">@style/Widget.Hmct.Wear.ListView</item>
+        <item name="android:progressBarStyle">@style/WearProgressBarStyle</item>
+        <item name="android:seekBarStyle">@style/Widget.Hmct.Wear.SeekBar</item>
+        <item name="android:radioButtonStyle">@style/Widget.Hmct.Wear.RadioButton</item>
+        <item name="android:textSize">28.0sp</item>
+        <item name="android:textColor">#ffffdba7</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">?android:selectableItemBackground</item>
+        <item name="android:alertDialogTheme">@style/Theme.Hmct.Wear.Dialog.Alert</item>
+        <item name="android:selectableItemBackground">@drawable/item_background_material</item>
+        <item name="android:actionModeCutDrawable">@null</item>
+        <item name="android:actionModeCopyDrawable">@null</item>
+        <item name="android:actionModePasteDrawable">@null</item>
+        <item name="android:editTextBackground">@drawable/ic_control_inputbox</item>
+        <item name="android:actionModeSelectAllDrawable">@null</item>
+        <item name="android:colorEdgeEffect">#a8faaf00</item>
+    </style>
+    <style name="Theme.Hmct.Wear.Dialog.Alert" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:buttonStyle">@style/Widget.Hmct.Wear.Button</item>
+        <item name="android:listPreferredItemHeight">90.0dip</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:checkboxStyle">@style/Widget.Hmct.Wear.CompoundButton.CheckBox</item>
+        <item name="android:imageButtonStyle">@style/Widget.Hmct.Wear.ImageButton</item>
+        <item name="android:listViewStyle">@style/Widget.Hmct.Wear.ListView</item>
+        <item name="android:progressBarStyle">@style/WearProgressBarStyle</item>
+        <item name="android:seekBarStyle">@style/Widget.Hmct.Wear.SeekBar</item>
+        <item name="android:radioButtonStyle">@style/Widget.Hmct.Wear.RadioButton</item>
+        <item name="android:textSize">28.0sp</item>
+        <item name="android:textColor">#ffffdba7</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">?android:selectableItemBackground</item>
+        <item name="android:selectableItemBackground">@drawable/item_background_material</item>
+        <item name="android:editTextBackground">@drawable/ic_control_inputbox</item>
+        <item name="android:windowMinWidthMajor">@dimen/dialog_min_width_minor</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialog_min_width_minor</item>
+        <item name="android:colorEdgeEffect">#a8faaf00</item>
+    </style>
+    <style name="Widget.Hmct.Wear.CompoundButton.CheckBox" parent="@android:style/Widget.Holo.Light.CompoundButton.CheckBox">
+        <item name="android:background">@drawable/item_background_borderless_material</item>
+    </style>
+    <style name="Widget.Hmct.Wear.RadioButton" parent="@android:style/Widget.Holo.Light.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/btn_radio_holo_light</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="WearProgressBarStyle" parent="@android:style/Widget.Holo.Light.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_medium</item>
+    </style>
+    <style name="Widget.Hmct.Wear.SeekBar" parent="@android:style/Widget.Holo.Light.SeekBar">
+        <item name="android:background">@drawable/item_background_borderless_material</item>
+        <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector_holo</item>
+    </style>
+    <style name="Widget.Hmct.Wear.Button" parent="@android:style/Widget.Holo.Light.Button">
+        <item name="android:textSize">32.0dip</item>
+        <item name="android:background">@drawable/btn_default_background</item>
+        <item name="android:minHeight">60.0dip</item>
+    </style>
+    <style name="Widget.Hmct.Wear.ImageButton" parent="@android:style/Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/image_btn_background</item>
+    </style>
+    <style name="Widget.Hmct.Wear.ListView" parent="@android:style/Widget.Holo.Light.ListView">
+        <item name="android:background">#ff000000</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:divider">@null</item>
+    </style>
+    <style name="CardContent">
+        <item name="android:paddingLeft">@dimen/card_content_padding_rect_left</item>
+        <item name="android:paddingTop">@dimen/card_content_padding_rect_top</item>
+        <item name="android:paddingRight">@dimen/card_content_padding_rect_right</item>
+    </style>
+    <style name="CardText" parent="@style/TextView.Medium.Light">
+        <item name="android:lineSpacingMultiplier">0.92</item>
+    </style>
+    <style name="CardTitle" parent="@style/TextView.Medium.Light">
+        <item name="android:textColor">@color/secondary_text_light</item>
+    </style>
+    <style name="DismissOverlayText" parent="@style/TextView.Large.Light">
+        <item name="android:textColor">@color/primary_text_dark</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/dismiss_close</item>
+        <item name="android:lineSpacingExtra">-2.0sp</item>
+    </style>
+    <style name="TextAppearance.Wearable.Large" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24.0sp</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+    </style>
+    <style name="TextAppearance.Wearable.Medium" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20.0sp</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+    </style>
+    <style name="TextAppearance.Wearable.Small" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+    </style>
+    <style name="TextView.Large" parent="@android:style/Widget.Holo.Light">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Large</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    <style name="TextView.Large.Light" parent="@style/TextView.Large">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Large</item>
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+    </style>
+    <style name="TextView.Medium" parent="@android:style/Widget.Holo.Light">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Medium</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    <style name="TextView.Medium.Light" parent="@style/TextView.Medium">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Medium</item>
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+    </style>
+    <style name="TextView.Small" parent="@android:style/Widget.Holo.Light">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Small</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+    <style name="TextView.Small.Light" parent="@style/TextView.Small">
+        <item name="android:textAppearance">@style/TextAppearance.Wearable.Small</item>
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+    </style>
+    <style name="Theme.Wearable" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+    <style name="Theme.Wearable.Modal" parent="@style/Theme.Wearable">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="RightLauncherTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+    <style name="LeftVoiceTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+    <style name="LeftConfirmNaviTheme">
+        <item name="android:windowSwipeToDismiss">true</item>
+    </style>
+    <style name="WatchfaceTheme" parent="@style/WearAppTheme">
+        <item name="android:windowBackground">@color/Black_transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowShowWallpaper">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="Animation" />
+    <style name="Animation.StatusBar" parent="@style/Animation" />
+    <style name="Animation.StatusBar.HeadsUp" parent="@style/Animation.StatusBar">
+        <item name="android:windowEnterAnimation">@anim/heads_up_enter</item>
+        <item name="android:windowExitAnimation">@anim/heads_up_exit</item>
+    </style>
+    <style name="style_white_text">
+        <item name="android:textSize">24.0dip</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="style_grey_text">
+        <item name="android:textSize">24.0dip</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+</resources>

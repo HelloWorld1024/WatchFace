@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="400.0dip" android:layout_height="400.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="32.0dip" android:textStyle="bold" android:textColor="#ffffdba7" android:id="@id/tip_dlg_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="60.0dip" android:layout_marginTop="50.0dip" android:layout_marginRight="60.0dip" android:maxLines="2" android:layout_centerHorizontal="true" />
+    <LinearLayout android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="140.0dip" android:layout_above="@id/tip_bottom_menu" android:layout_centerHorizontal="true">
+        <ScrollView android:layout_gravity="center_horizontal" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="32.0dip" android:textColor="#ffffdba7" android:layout_gravity="center_horizontal" android:id="@id/tip_dlg_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginRight="30.0dip" />
+        </ScrollView>
+    </LinearLayout>
+    <com.hmct.wearable.widget.WearBottomSingleMenu android:id="@id/tip_bottom_menu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+</RelativeLayout>

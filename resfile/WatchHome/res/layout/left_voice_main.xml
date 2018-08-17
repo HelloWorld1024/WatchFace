@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.DelayedConfirmationView android:layout_gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" app:circle_color="@color/black" app:circle_radius="202.0dip" app:circle_radius_pressed="50.0dip" app:circle_border_width="1.0dip" app:circle_border_color="@color/white"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/no_network" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="100.0dip" android:layout_centerHorizontal="true">
+                <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/v_no_network" />
+                <TextView android:textSize="24.0dip" android:textColor="#ffffdba7" android:gravity="center_horizontal" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/str_no_network" />
+            </LinearLayout>
+            <com.hmct.wearable.widget.WearBottomSingleMenu android:id="@id/network_setting" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <RelativeLayout android:id="@id/mainlayout" android:background="@drawable/bg_voice" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.hmct.wearable.widget.WearSineWave android:id="@id/sine_wave" android:layout_width="wrap_content" android:layout_height="100.0dip" android:layout_marginTop="140.0dip" android:layout_centerHorizontal="true" />
+            <com.hmct.wearable.widget.WearBottomSingleMenu android:id="@id/voice_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+            <TextView android:textSize="28.0dip" android:textColor="#ffffdba7" android:gravity="center_horizontal" android:id="@id/hint_speak_again" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="120.0dip" android:layout_marginRight="15.0dip" android:text="@string/str_recognize" />
+            <TextView android:textSize="28.0dip" android:textColor="#ffffdba7" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/v_show_msg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="120.0dip" android:layout_marginRight="15.0dip" android:text="@string/str_recognize" android:maxLines="3" />
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.wearable.view.DelayedConfirmationView>

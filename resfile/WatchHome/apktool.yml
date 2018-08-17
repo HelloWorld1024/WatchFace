@@ -1,0 +1,42 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: WatchHome.apk
+compressionType: false
+doNotCompress:
+- arsc
+- res/drawable-hdpi-v4/card_frame.9.png
+- res/drawable-hdpi-v4/card_frame_pressed.9.png
+- png
+- res/drawable-mdpi-v4/btn_default_disabled.9.png
+- res/drawable-mdpi-v4/btn_default_normal.9.png
+- res/drawable-mdpi-v4/btn_default_pressed.9_dark.png
+- res/drawable-mdpi-v4/card_frame.9.png
+- res/drawable-mdpi-v4/card_frame_pressed.9.png
+- res/drawable-mdpi-v4/dialog_full.9.png
+- res/drawable-mdpi-v4/dialog_full_holo_light.9.png
+- res/drawable-mdpi-v4/ic_control_inputbox.9.png
+- res/drawable-mdpi-v4/list_section_divider_holo_light.9.png
+- res/drawable-mdpi-v4/scrubber_primary.9.png
+- res/drawable-mdpi-v4/scrubber_secondary.9.png
+- res/drawable-mdpi-v4/scrubber_track.9.png
+- res/drawable-xhdpi-v4/card_frame.9.png
+- res/drawable-xhdpi-v4/card_frame_pressed.9.png
+- res/drawable-xhdpi-v4/ic_notification_overlay.9.png
+- res/drawable-xxhdpi-v4/ic_notification_overlay.9.png
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '23'
+  targetSdkVersion: '23'
+sharedLibrary: false
+sparseResources: false
+unknownFiles: {}
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.3.3
+versionInfo:
+  versionCode: '10010001'
+  versionName: 1.01.001

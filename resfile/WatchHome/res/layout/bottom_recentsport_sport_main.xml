@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/b_rs_sport_data_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingTop="118.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="?android:textAppearanceLarge" android:textSize="70.0sp" android:textColor="@android:color/white" android:gravity="center_horizontal" android:id="@id/b_rs_sport_speech" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="24.0sp" android:textColor="@color/text_color_default" android:layout_gravity="bottom" android:id="@id/b_rs_sport_speech_unit" android:paddingBottom="15.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/b_rs_speed_unit" android:alpha="0.3" android:paddingStart="10.0dip" android:paddingEnd="1.0dip" />
+    </LinearLayout>
+    <TextView android:textAppearance="?android:textAppearanceLarge" android:textSize="32.0sp" android:textColor="@color/text_color_default" android:layout_gravity="center_horizontal" android:id="@id/b_rs_sport_time" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="#ff572810" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_marginBottom="60.0dip">
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="28.0sp" android:textColor="#ffffdba9" android:gravity="center_horizontal" android:id="@id/b_rs_sport_calorie" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="28.0sp" android:textColor="#ffffdba9" android:gravity="center_horizontal" android:id="@id/b_rs_sport_calorie_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/b_rs_calorie_unit" android:paddingStart="5.0dip" android:paddingEnd="1.0dip" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:textAppearance="?android:textAppearanceLarge" android:textSize="28.0sp" android:textColor="#ffffdba9" android:gravity="center_horizontal" android:id="@id/b_rs_sport_distance" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textAppearance="?android:textAppearanceMedium" android:textSize="28.0sp" android:textColor="#ffffdba9" android:gravity="center_horizontal" android:id="@id/b_rs_sport_distance_unit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="5.0dip" android:paddingEnd="1.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

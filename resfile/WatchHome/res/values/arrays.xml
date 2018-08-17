@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_entries">
+        <item>普通话</item>
+        <item>粤语</item>
+        <item>河南话</item>
+        <item>英语</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>mandarin</item>
+        <item>cantonese</item>
+        <item>henanese</item>
+        <item>en_us</item>
+    </string-array>
+    <string-array name="punc_entries">
+        <item>有标点</item>
+        <item>无标点</item>
+    </string-array>
+    <string-array name="punc_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="dwa_entries">
+        <item>开启</item>
+        <item>关闭</item>
+    </string-array>
+    <string-array name="voicer_cloud_entries">
+        <item>小燕—女青、中英、普通话</item>
+        <item>小宇—男青、中英、普通话</item>
+        <item>凯瑟琳—女青、英</item>
+        <item>亨利—男青、英</item>
+        <item>玛丽—女青、英</item>
+        <item>小研—女青、中英、普通话</item>
+        <item>小琪—女青、中英、普通话</item>
+        <item>小峰—男青、中英、普通话</item>
+        <item>小梅—女青、中英、粤语</item>
+        <item>小莉—女青、中英、台湾普通话</item>
+        <item>小蓉—女青、中、四川话</item>
+        <item>小芸—女青、中、东北话</item>
+        <item>小坤—男青、中、河南话</item>
+        <item>小强—男青、中、湖南话</item>
+        <item>小莹—女青、中、陕西话</item>
+        <item>小新—男童、中、普通话</item>
+        <item>楠楠—女童、中、普通话</item>
+        <item>老孙—男老、中、普通话</item>
+    </string-array>
+    <string-array name="voicer_cloud_values">
+        <item>xiaoyan</item>
+        <item>xiaoyu</item>
+        <item>catherine</item>
+        <item>henry</item>
+        <item>vimary</item>
+        <item>vixy</item>
+        <item>xiaoqi</item>
+        <item>vixf</item>
+        <item>xiaomei</item>
+        <item>xiaolin</item>
+        <item>xiaorong</item>
+        <item>xiaoqian</item>
+        <item>xiaokun</item>
+        <item>xiaoqiang</item>
+        <item>vixying</item>
+        <item>xiaoxin</item>
+        <item>nannan</item>
+        <item>vils</item>
+    </string-array>
+    <string-array name="stream_entries">
+        <item>通话</item>
+        <item>系统</item>
+        <item>铃声</item>
+        <item>音乐</item>
+        <item>闹铃</item>
+        <item>通知</item>
+    </string-array>
+    <string-array name="stream_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="launcherPackageSort">
+        <item>com.hmct.watch.sportsapp</item>
+        <item>com.android.dialer</item>
+        <item>com.android.mms</item>
+        <item>weixin</item>
+        <item>yueba</item>
+        <item>com.hmct.wearable.music</item>
+        <item>com.hmct.wearable.stepscount</item>
+        <item>com.hmct.wearable.heartrate</item>
+        <item>com.hmct.wearable.sleepmonitor</item>
+        <item>com.hmct.wearable.map</item>
+        <item>com.hmct.wearable.voice</item>
+        <item>com.hmct.wearable.weather</item>
+        <item>com.hmct.wearable.tools</item>
+        <item>com.qualcomm.qti.watchsettings</item>
+    </string-array>
+    <string-array name="toolsPackageSort">
+        <item>com.hmct.wearable.calendar</item>
+        <item>com.hmct.wearable.alarmclock</item>
+        <item>com.hmct.wearable.stopwatch</item>
+        <item>com.hmct.wearable.timerclock</item>
+        <item>com.hmct.wearable.compass</item>
+        <item>com.hmct.wearable.altimeter</item>
+        <item>com.hmct.wearable.barometer</item>
+    </string-array>
+    <string-array name="excludePackageList">
+        <item>com.qualcomm.qualcommsettings</item>
+        <item>com.widevine.demo</item>
+        <item>com.android.email</item>
+        <item>com.qualcomm.embmstest</item>
+        <item>com.android.MultiplePdpTest</item>
+        <item>com.qualcomm.qti.presenceapp</item>
+        <item>com.qualcomm.qti.ims.tests</item>
+        <item>com.playready.junit</item>
+        <item>com.quicinc.CrashLogger</item>
+        <item>com.qualcomm.msapu</item>
+        <item>org.codeaurora.bluetooth.bttestapp</item>
+        <item>com.qualcomm.qti.rcs.common</item>
+        <item>com.android.providers.downloads.ui</item>
+        <item>com.android.inputmethod.latin</item>
+        <item>com.android.mltcode.ferace</item>
+        <item>com.qualcomm.qti.modemtestmode</item>
+        <item>com.hmct.wearable.calendar</item>
+        <item>com.hmct.wearable.alarmclock</item>
+        <item>com.hmct.wearable.stopwatch</item>
+        <item>com.hmct.wearable.timerclock</item>
+        <item>com.hmct.wearable.compass</item>
+        <item>com.hmct.wearable.altimeter</item>
+        <item>com.hmct.wearable.barometer</item>
+    </string-array>
+    <string-array name="excludeAospPackageList">
+        <item>com.android.settings</item>
+        <item>com.android.browser</item>
+        <item>com.qualcomm.qti.app</item>
+        <item>com.android.qlogging</item>
+        <item>com.quicinc.cne.settings</item>
+        <item>org.codeaurora.bluetooth.hiddtestapp</item>
+        <item>com.qualcomm.location.qvtester</item>
+        <item>com.qualcomm.qti.auth.fidocryptosample</item>
+        <item>com.qualcomm.ims.tests</item>
+        <item>com.android.nativeaudiolatency</item>
+    </string-array>
+    <string-array name="b_rs_sport_type">
+        <item>HIKE</item>
+        <item>RUN</item>
+        <item>INDOOR RUN</item>
+        <item>RIDE</item>
+        <item>INDOOR_RIDE</item>
+        <item>CLIMBING</item>
+        <item>STEP</item>
+        <item>OPEN_AREA_SWIM</item>
+    </string-array>
+    <string-array name="ji_bu_array">
+        <item>迹部</item>
+        <item>机不</item>
+        <item>记步</item>
+        <item>进步</item>
+    </string-array>
+</resources>

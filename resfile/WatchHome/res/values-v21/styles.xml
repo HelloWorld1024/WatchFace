@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WearAppTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:buttonStyle">@style/Widget.Hmct.Wear.Button</item>
+        <item name="android:listPreferredItemHeight">90.0dip</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:checkboxStyle">@style/Widget.Hmct.Wear.CompoundButton.CheckBox</item>
+        <item name="android:imageButtonStyle">@style/Widget.Hmct.Wear.ImageButton</item>
+        <item name="android:listViewStyle">@style/Widget.Hmct.Wear.ListView</item>
+        <item name="android:progressBarStyle">@style/WearProgressBarStyle</item>
+        <item name="android:seekBarStyle">@style/Widget.Hmct.Wear.SeekBar</item>
+        <item name="android:radioButtonStyle">@style/Widget.Hmct.Wear.RadioButton</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">?android:selectableItemBackground</item>
+        <item name="android:alertDialogTheme">@style/Theme.Hmct.Wear.Dialog.Alert</item>
+        <item name="android:selectableItemBackground">@drawable/item_background_material</item>
+        <item name="android:actionModeCutDrawable">@null</item>
+        <item name="android:actionModeCopyDrawable">@null</item>
+        <item name="android:actionModePasteDrawable">@null</item>
+        <item name="android:editTextBackground">@drawable/ic_control_inputbox</item>
+        <item name="android:actionModeSelectAllDrawable">@null</item>
+        <item name="android:colorEdgeEffect">#a8faaf00</item>
+    </style>
+    <style name="Theme.Hmct.Wear.Dialog.Alert" parent="@android:style/Theme.DeviceDefault.Dialog">
+        <item name="android:buttonStyle">@style/Widget.Hmct.Wear.Button</item>
+        <item name="android:listPreferredItemHeight">90.0dip</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:checkboxStyle">@style/Widget.Hmct.Wear.CompoundButton.CheckBox</item>
+        <item name="android:imageButtonStyle">@style/Widget.Hmct.Wear.ImageButton</item>
+        <item name="android:listViewStyle">@style/Widget.Hmct.Wear.ListView</item>
+        <item name="android:progressBarStyle">@style/WearProgressBarStyle</item>
+        <item name="android:seekBarStyle">@style/Widget.Hmct.Wear.SeekBar</item>
+        <item name="android:radioButtonStyle">@style/Widget.Hmct.Wear.RadioButton</item>
+        <item name="android:textSize">28.0sp</item>
+        <item name="android:textColor">#ffffdba7</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">?android:selectableItemBackground</item>
+        <item name="android:selectableItemBackground">@drawable/item_background_material</item>
+        <item name="android:editTextBackground">@drawable/ic_control_inputbox</item>
+        <item name="android:windowMinWidthMajor">@dimen/dialog_min_width_minor</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialog_min_width_minor</item>
+        <item name="android:colorEdgeEffect">#a8faaf00</item>
+    </style>
+    <style name="Widget.Hmct.Wear.CompoundButton.CheckBox" parent="@android:style/Widget.Holo.Light.CompoundButton.CheckBox">
+        <item name="android:background">@drawable/item_background_borderless_material</item>
+    </style>
+    <style name="Widget.Hmct.Wear.RadioButton" parent="@android:style/Widget.Holo.Light.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/btn_radio_holo_light</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="WearProgressBarStyle" parent="@android:style/Widget.Holo.Light.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_medium</item>
+    </style>
+    <style name="Widget.Hmct.Wear.SeekBar" parent="@android:style/Widget.Holo.Light.SeekBar">
+        <item name="android:background">@drawable/item_background_borderless_material</item>
+        <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector_holo</item>
+    </style>
+    <style name="Widget.Hmct.Wear.Button" parent="@android:style/Widget.Holo.Light.Button">
+        <item name="android:textSize">32.0dip</item>
+        <item name="android:background">@drawable/btn_default_background</item>
+        <item name="android:minHeight">60.0dip</item>
+    </style>
+    <style name="Widget.Hmct.Wear.ImageButton" parent="@android:style/Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/image_btn_background</item>
+    </style>
+    <style name="Widget.Hmct.Wear.ListView" parent="@android:style/Widget.Holo.Light.ListView">
+        <item name="android:background">#ff000000</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:listSelector">@drawable/item_background_material</item>
+        <item name="android:divider">@null</item>
+    </style>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference android:entries="@array/language_entries" android:title="语言设置" android:key="understander_language_preference" android:summary="支持：普通话，粤语，河南话，英语 " android:defaultValue="mandarin" android:entryValues="@array/language_values" />
+    <EditTextPreference android:title="前端点超时" android:key="understander_vadbos_preference" android:summary="默认值：短信转写5000，其他4000" android:defaultValue="4000" android:dialogTitle="请输入时间(0-10000)ms" />
+    <EditTextPreference android:title="后端点超时" android:key="understander_vadeos_preference" android:summary="默认值：短信转写1800，其他700 " android:defaultValue="700" android:dialogTitle="请输入时间(0-10000)ms" />
+    <ListPreference android:entries="@array/punc_entries" android:title="标点符号" android:key="understander_punc_preference" android:summary="默认值：有标点 " android:defaultValue="1" android:entryValues="@array/punc_values" />
+</PreferenceScreen>

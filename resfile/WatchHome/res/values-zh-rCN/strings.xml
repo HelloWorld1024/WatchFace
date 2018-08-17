@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dp_day">日</string>
+    <string name="dp_month">月</string>
+    <string name="dp_year">年</string>
+    <string name="choose_view_male">男</string>
+    <string name="choose_view_female">女</string>
+    <string name="app_name">WatchHome</string>
+    <string name="denied_required_permission">没有访问权限</string>
+    <string name="str_recognize">识别中</string>
+    <string name="str_recognize_unclear">没听清楚，请再说一遍</string>
+    <string name="str_recognize_fail">请点击按钮，再次语音</string>
+    <string name="action_settings">设置</string>
+    <string name="pref_key_iat_show">iat_show</string>
+    <string name="pref_title_iat_show">显示听写界面</string>
+    <string name="welcome_text">"您好，
+我有什么可以帮您的？"</string>
+    <string name="str_no_app_found">没有找到匹配项</string>
+    <string name="str_understand_error">识别结果不正确。</string>
+    <string name="str_no_network">"未连接网络
+当前智能语音不可用"</string>
+    <string name="action_open">打开</string>
+    <string name="app_map_name">地图</string>
+    <string name="app_phone_name">电话</string>
+    <string name="app_mms_name">短信</string>
+    <string name="tts_toast_format" formatted="false">缓冲进度为%d%%，播放进度为%d%%</string>
+    <string name="right_launcher_tools">小工具</string>
+    <string name="empty_shade_text">无通知</string>
+    <string name="clear_notification_text">清除通知</string>
+    <string name="notification_hidden_text">Contents hidden</string>
+    <string name="battery_meter_format">%d%%</string>
+    <string name="title_distance">距离</string>
+    <string name="title_calorie">卡路里</string>
+    <string name="string_sport_type">运动类型</string>
+    <string name="string_no_item">无选项.</string>
+    <string name="b_rs_calorie">卡路里: %dKcal</string>
+    <string name="b_rs_speed_unit">km/h</string>
+    <string name="b_rs_time">时间</string>
+    <string name="b_rs_distance">距离</string>
+    <string name="b_rs_distance_unit_m"> m</string>
+    <string name="b_rs_distance_unit_km"> km</string>
+    <string name="b_rs_calorie_unit"> Kcal</string>
+    <string name="b_rs_height_max">总上升</string>
+    <string name="b_rs_height_min">总下降</string>
+    <string name="b_rs_no_data">开始运动</string>
+    <string name="b_sc_step_current_unit">步</string>
+    <string name="b_sc_step_target">目标: %d</string>
+    <string name="b_sc_calorie">卡路里</string>
+    <string name="launcher_package_name">com.qualcomm.qti.watchhome</string>
+    <string name="sim_pin_ok">OK</string>
+    <string name="sim_pin_title">SIM PIN</string>
+    <string name="sim_pin_dialog_title">SIM PIN</string>
+    <string name="kg_sim_pin_instructions">Enter SIM PIN</string>
+    <string name="kg_sim_pin_instructions_multi">Enter SIM PIN for \"%1$s\"</string>
+    <string name="kg_puk_enter_puk_hint">SIM is now disabled. Enter PUK code to continue. Contact carrier for details.</string>
+    <string name="kg_puk_enter_puk_hint_multi">SIM \"%1$s\" is now disabled. Enter PUK code to continue. Contact carrier for details.</string>
+    <string name="kg_puk_enter_pin_hint">Enter desired PIN code</string>
+    <string name="kg_enter_confirm_pin_hint">Confirm desired PIN code</string>
+    <string name="kg_sim_unlock_progress_dialog_message">Unlocking SIM card…</string>
+    <string name="kg_invalid_sim_pin_hint">Type a PIN that is 4 to 8 numbers.</string>
+    <string name="kg_invalid_sim_puk_hint">PUK code should be 8 numbers or more.</string>
+    <string name="kg_invalid_puk">Re-enter the correct PUK code. Repeated attempts will permanently disable the SIM.</string>
+    <string name="kg_invalid_confirm_pin_hint">PIN codes does not match</string>
+    <string name="keyguard_sim_unlock_progress_dialog_message">Unlocking SIM card…</string>
+    <string name="kg_password_wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
+    <string name="kg_password_wrong_puk_code_dead">SIM is unusable. Contact your carrier.</string>
+    <string name="kg_password_pin_failed">SIM PIN operation failed!</string>
+    <string name="kg_password_puk_failed">SIM PUK operation failed!</string>
+    <string name="kg_pin_accepted">Code Accepted!</string>
+    <string name="ji_bu">计步</string>
+    <string name="no_music">无音乐</string>
+    <string name="artists_title">歌手</string>
+    <string name="tracks_title">歌曲</string>
+    <string name="no_contacts_found">没有找到联系人</string>
+    <string name="string_default_time">00:40:20</string>
+</resources>

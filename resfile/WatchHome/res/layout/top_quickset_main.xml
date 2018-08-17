@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.DelayedConfirmationView android:layout_gravity="center_horizontal" android:id="@id/bottom_quickset_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" app:circle_color="@color/black" app:circle_radius="202.0dip" app:circle_radius_pressed="50.0dip" app:circle_border_width="1.0dip" app:circle_border_color="@color/white"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.hmct.wearable.widget.WearCircleProgressBar android:gravity="center" android:layout_gravity="center" android:id="@id/progress_single" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingTop="50.0px" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:paddingTop="50.0px" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <Button android:gravity="center" android:id="@id/airplane" android:background="@drawable/ic_airplanemode_on" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="6.0px" />
+            <Button android:gravity="center" android:id="@id/mute" android:background="@drawable/ic_mute_on" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="6.0px" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:paddingTop="12.0px" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <Button android:gravity="center" android:id="@id/wifi" android:background="@drawable/ic_wifi_off" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="6.0px" />
+            <Button android:gravity="center" android:id="@id/notification" android:background="@drawable/ic_notification_on" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="6.0px" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:paddingTop="22.0px" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <include android:id="@id/signal_cluster" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="16.0px" layout="@layout/signal_cluster_view" />
+            <ImageView android:gravity="center_vertical" android:id="@id/bluetooth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toStartOf="@id/signal_cluster" />
+            <com.qualcomm.qti.watchhome.top.battery.BatteryView android:gravity="center_vertical" android:id="@id/battery_hmct" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" />
+            <TextView android:textSize="20.0dip" android:textStyle="normal" android:textColor="#ffffdba7" android:gravity="center_vertical" android:id="@id/percentage_hmct" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.wearable.view.DelayedConfirmationView>

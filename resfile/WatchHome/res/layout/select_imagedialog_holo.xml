@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view android:layout_gravity="center_horizontal" android:id="@id/select_imagedialog_listview" android:scrollbars="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="@null" android:divider="@null" android:overScrollMode="ifContentScrolls" android:textAlignment="viewStart" class="com.hmct.wearable.widget.WearImageAlertController$RecycleListView"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

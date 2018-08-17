@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="28.0dip" android:textColor="#ffffdba8" android:id="@id/message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="164.0dip" android:layout_centerHorizontal="true" />
+    <com.hmct.wearable.widget.WearBottomDoubleMenu android:id="@id/confirm_menu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    <LinearLayout android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="66.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <ImageView android:id="@id/navi_cancel" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/v_cancel" />
+        <ImageView android:id="@id/navi_confirm" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="36.0dip" android:src="@drawable/v_ok" />
+    </LinearLayout>
+</RelativeLayout>

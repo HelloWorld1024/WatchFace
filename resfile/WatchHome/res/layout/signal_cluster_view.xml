@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qualcomm.qti.watchhome.top.signal.SignalClusterView android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingEnd="0.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:gravity="center_vertical" android:id="@id/hd_icon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_hd" android:layout_marginStart="0.0dip" />
+    <FrameLayout android:gravity="center_vertical" android:id="@id/mobile_combo" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/mobile_signal" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <ImageView android:id="@id/no_sim" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </FrameLayout>
+    <FrameLayout android:layout_gravity="center_vertical" android:id="@id/mobile_activity_group" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <View android:visibility="invisible" android:layout_width="6.0dip" android:layout_height="6.0dip" />
+        <ImageView android:id="@id/mobile_inout" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </FrameLayout>
+    <View android:id="@id/wifi_airplane_spacer" android:visibility="gone" android:layout_width="4.0dip" android:layout_height="4.0dip" />
+    <ImageView android:gravity="center_vertical" android:id="@id/airplane" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</com.qualcomm.qti.watchhome.top.signal.SignalClusterView>

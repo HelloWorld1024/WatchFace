@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="layout_box">
+        <flag name="all" value="0x0000000f" />
+        <flag name="bottom" value="0x00000008" />
+        <flag name="left" value="0x00000001" />
+        <flag name="right" value="0x00000004" />
+        <flag name="top" value="0x00000002" />
+    </attr>
+    <attr name="circle_color" format="color" />
+    <attr name="circle_radius" format="dimension" />
+    <attr name="circle_radius_pressed" format="dimension" />
+    <attr name="circle_border_width" format="dimension" />
+    <attr name="circle_border_color" format="color" />
+    <attr name="circle_padding" format="dimension" />
+    <attr name="shadow_width" format="dimension" />
+    <attr name="update_interval" format="integer" />
+    <attr name="rectLayout" format="reference" />
+    <attr name="roundLayout" format="reference" />
+    <attr name="layout_maxHeight" format="dimension">
+        <enum name="unbounded" value="-1" />
+    </attr>
+    <attr name="layout_minHeight" format="dimension" />
+    <attr name="vpiCirclePageIndicatorStyle" format="reference" />
+    <attr name="vpiIconPageIndicatorStyle" format="reference" />
+    <attr name="vpiLinePageIndicatorStyle" format="reference" />
+    <attr name="vpiTitlePageIndicatorStyle" format="reference" />
+    <attr name="vpiTabPageIndicatorStyle" format="reference" />
+    <attr name="vpiUnderlinePageIndicatorStyle" format="reference" />
+    <attr name="centered" format="boolean" />
+    <attr name="selectedColor" format="color" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="unselectedColor" format="color" />
+    <attr name="fillColor" format="color" />
+    <attr name="pageColor" format="color" />
+    <attr name="radius" format="dimension" />
+    <attr name="snap" format="boolean" />
+    <attr name="strokeColor" format="color" />
+    <attr name="lineWidth" format="dimension" />
+    <attr name="gapWidth" format="dimension" />
+    <attr name="clipPadding" format="dimension" />
+    <attr name="footerColor" format="color" />
+    <attr name="footerLineHeight" format="dimension" />
+    <attr name="footerIndicatorStyle">
+        <enum name="none" value="0" />
+        <enum name="triangle" value="1" />
+        <enum name="underline" value="2" />
+    </attr>
+    <attr name="footerIndicatorHeight" format="dimension" />
+    <attr name="footerIndicatorUnderlinePadding" format="dimension" />
+    <attr name="footerPadding" format="dimension" />
+    <attr name="linePosition">
+        <enum name="bottom" value="0" />
+        <enum name="top" value="1" />
+    </attr>
+    <attr name="selectedBold" format="boolean" />
+    <attr name="titlePadding" format="dimension" />
+    <attr name="topPadding" format="dimension" />
+    <attr name="fades" format="boolean" />
+    <attr name="fadeDelay" format="integer" />
+    <attr name="fadeLength" format="integer" />
+</resources>

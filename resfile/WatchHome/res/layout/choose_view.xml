@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.hmct.wearable.widget.WearCheckedTextView android:textSize="48.0dip" android:textStyle="bold" android:layout_gravity="center_vertical" android:id="@id/boy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="20.0dip" android:text="@string/choose_view_male" />
+    <TextView android:textSize="24.0dip" android:textColor="#ffffdba7" android:layout_gravity="center_vertical" android:id="@id/center_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="20.0dip" android:text="@string/choose_view_or" />
+    <com.hmct.wearable.widget.WearCheckedTextView android:textSize="48.0dip" android:textStyle="bold" android:layout_gravity="center_vertical" android:id="@id/girl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="20.0dip" android:text="@string/choose_view_female" />
+</LinearLayout>

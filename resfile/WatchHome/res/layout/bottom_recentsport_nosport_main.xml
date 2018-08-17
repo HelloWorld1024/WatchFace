@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:id="@id/b_rs_no_data_layout" android:background="@drawable/bg_run_play" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceLarge" android:textSize="45.0sp" android:textColor="@color/text_color_default" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/b_rs_no_data" android:contentDescription="@string/b_rs_no_data" />
+    <com.hmct.wearable.widget.WearBottomSingleMenu android:layout_gravity="bottom|center" android:id="@id/b_rs_start_sportapp" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</FrameLayout>

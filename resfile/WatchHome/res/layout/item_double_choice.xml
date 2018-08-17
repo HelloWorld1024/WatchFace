@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="64.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="32.0pt" android:textColor="#fffafafa" android:id="@id/item_double_checkbox_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_alignParentLeft="true" />
+    <TextView android:textSize="24.0pt" android:textColor="#4afafafa" android:id="@id/item_checkbox_second_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/item_double_normal_tv" android:layout_alignLeft="@id/item_double_normal_tv" />
+    <CheckBox android:id="@id/item_double_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" />
+</RelativeLayout>

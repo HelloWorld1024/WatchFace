@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="25.0sp" android:id="@id/sim_pin_title" android:paddingTop="@dimen/activity_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sim_pin_title" android:layout_centerHorizontal="true" />
+    <TextView android:textSize="20.0sp" android:ellipsize="marquee" android:id="@id/sim_pin_message" android:paddingTop="@dimen/activity_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scrollHorizontally="true" android:singleLine="true" android:layout_below="@id/sim_pin_title" android:layout_centerHorizontal="true" android:marqueeRepeatLimit="marquee_forever" />
+    <EditText android:textSize="20.0sp" android:id="@id/sim_pin_edit_text" android:paddingBottom="@dimen/activity_padding" android:focusable="true" android:layout_width="fill_parent" android:layout_height="40.0dip" android:password="true" android:numeric="integer" android:layout_below="@id/sim_pin_message" android:imeOptions="actionDone" android:imeActionLabel="@string/sim_pin_ok" />
+    <Button android:textSize="20.0sp" android:id="@id/sim_pin_ok" android:paddingTop="@dimen/activity_padding" android:paddingBottom="@dimen/activity_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sim_pin_ok" android:layout_below="@id/sim_pin_edit_text" android:layout_centerHorizontal="true" android:onClick="onSIMPINOKClicked" />
+</RelativeLayout>
