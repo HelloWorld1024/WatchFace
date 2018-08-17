@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <!--
+    <include layout="@layout/fragment_voice_assistant"/>
+    <include layout="@layout/fragment_app_list"/>
+
+    <include layout="@layout/layout_top_settings"/>
+    <include layout="@layout/layout_bottom_sports"/>
+     -->
+</FrameLayout>

@@ -1,49 +1,40 @@
 package com.tnt.watchhome.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tnt.watchhome.R;
-import com.tnt.watchhome.ui.view.CustomWatchFace;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link WatchFragment.OnFragmentInteractionListener} interface
+ * {@link TopFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link WatchFragment#newInstance} factory method to
+ * Use the {@link TopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WatchFragment extends Fragment {
-
-    private static final String TAG = "watchFragment";
+public class TopFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PAGE= "arg_page";
-    private static final String ARG_TITLE = "arg_title";
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-
+    public static final String FRAGMENT_TAG = "top_fragment";
 
     // TODO: Rename and change types of parameters
-    private int  mPage;
-    private String mTitle;
-    private CustomWatchFace mWatch ;
+    private String mParam1;
+    private String mParam2;
 
     private View mView ;
 
-    private Activity mActivity ;
-
     private OnFragmentInteractionListener mListener;
 
-    private GestureDetector mGestureDetector ;
-    private int mScrollDirection ;
-
-    public WatchFragment() {
+    public TopFragment() {
         // Required empty public constructor
     }
 
@@ -51,16 +42,16 @@ public class WatchFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param page Parameter 1.
-     * @param page Parameter 2.
-     * @return A new instance of fragment WatchFragment.
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment TopFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WatchFragment newInstance(int page, String title) {
-        WatchFragment fragment = new WatchFragment();
+    public static TopFragment newInstance(String param1, String param2) {
+        TopFragment fragment = new TopFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        args.putString(ARG_TITLE, title);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,8 +60,8 @@ public class WatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mPage = getArguments().getInt(ARG_PAGE);
-            mTitle = getArguments().getString(ARG_TITLE);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -78,16 +69,19 @@ public class WatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         if (null == mView) {
-            mView = inflater.inflate(R.layout.fragment_watch, container, false);
-            mWatch = mView.findViewById(R.id.watch_face) ;
-            mWatch.setFragment(this);
+            mView = inflater.inflate(R.layout.fragment_top_center, container, false);
         }
+
         return mView ;
     }
 
-
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -107,6 +101,10 @@ public class WatchFragment extends Fragment {
     }
 
 
+    public void showView() {
+        if (null == mView)return;
+        mView.setVisibility(View.VISIBLE);
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -120,21 +118,9 @@ public class WatchFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(int gestureDirection);
+        void onFragmentInteraction(Uri uri);
     }
 
-
-    public void setDirection(int direction) {
-        mScrollDirection = direction ;
-        notifyDirection() ;
-    }
-    public int getScrollDirection(){
-        return mScrollDirection ;
-    }
-    public void notifyDirection() {
-        if (null == mListener)return ;
-        mListener.onFragmentInteraction(mScrollDirection);
-    }
 
 
 }

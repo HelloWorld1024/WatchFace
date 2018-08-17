@@ -5,4 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_top</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_exit_top</item>
+
+
+    </style>
+
 </resources>

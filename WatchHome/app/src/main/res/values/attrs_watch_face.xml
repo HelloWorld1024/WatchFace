@@ -1,4 +1,6 @@
 <resources>
+
+    <!--表盘相关属性　start-->
     <declare-styleable name="AnologWatchFace">
         <attr name="viewSize" format="dimension"/>
         <attr name="borderColor" format="color"/>
@@ -31,6 +33,7 @@
 
     </declare-styleable>
 
+
     <declare-styleable name="CustomeWatch">
         <attr name="dial" format="reference"/>
         <attr name="hourHand" format="reference"/>
@@ -40,4 +43,19 @@
         <attr name="textsize" format="dimension"/>
         <attr name="textcolor" format="color"/>
     </declare-styleable>
+    <!--表盘相关属性　end-->
+
+
+    <!--　布局控件相关属性 start-->
+    <declare-styleable name="BoxInsetLayout_Layout">
+        <attr name="boxedEdges" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="WearableRecyclerView">
+        <attr name="circularScrollingGestureEnabled" format="boolean"/>
+        <attr name="bezelWidth" format="dimension"/>
+        <attr name="scrollDegreesPerScreen" format="dimension"/>
+    </declare-styleable>
+    <!--　布局控件相关属性 end-->
+
 </resources>

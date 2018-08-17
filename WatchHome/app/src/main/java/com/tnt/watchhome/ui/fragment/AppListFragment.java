@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.tnt.watchhome.Bean.AppItem;
 import com.tnt.watchhome.R;
-import com.tnt.watchhome.ui.adapter.ApplistAdapter;
-
+import com.tnt.watchhome.contorl.Controller;
+import com.tnt.watchhome.ui.adapter.WearRecyclerViewAdapter;
+import com.tnt.watchhome.ui.listener.CustomScrollingLayoutCallback;
+import com.tnt.watchhome.widget.WearableLinearLayoutManager;
+import com.tnt.watchhome.widget.WearableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +27,24 @@ import java.util.List;
 public class AppListFragment extends Fragment {
     private static final String TAG = "watch";
 
-    private ListView mApplist ;
     private View mView ;
+    private WearableRecyclerView mWearableRecyclerView ;
+
+    private Controller mController ;
+
+    private WearRecyclerViewAdapter mAdapter ;
+
+    private WearableLinearLayoutManager mWearLinearLayoutManager ;
 
     private static final List<AppItem> mAppItems= new ArrayList<AppItem>();
 
 
+
     private int initData() {
+        int len  = mAppItems.size() ;
+        for (int i =0 ; i< len; i++) {
+            mAppItems.remove(i);
+        }
         int resImage[]={R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard
         ,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard} ;
 
@@ -47,6 +60,8 @@ public class AppListFragment extends Fragment {
                 mAppItems.add(appItem);
             }
         }
+
+        mAdapter = new WearRecyclerViewAdapter(mAppItems,mController) ;
         return 0 ;
     }
 
@@ -68,12 +83,22 @@ public class AppListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (null == mView) {
+        if (null == mView || null == mWearLinearLayoutManager) {
             mView = inflater.inflate(R.layout.fragment_app_list, container, false);
+            CustomScrollingLayoutCallback customScrollingLayoutCallback = new CustomScrollingLayoutCallback(getActivity()) ;
+            mWearLinearLayoutManager = new WearableLinearLayoutManager(getContext(),customScrollingLayoutCallback) ;
         }
-        mApplist = mView.findViewById(R.id.list_item) ;
-        mApplist.setAdapter(new ApplistAdapter(mAppItems));
+        mWearableRecyclerView = mView.findViewById(R.id.wear_recyclerview) ;
+        mWearableRecyclerView.setEdgeItemsCenteringEnabled(true);
+        mWearableRecyclerView.setLayoutManager(mWearLinearLayoutManager);
+        mWearableRecyclerView.setAdapter(mAdapter);
 
+
+
+
+        mWearableRecyclerView.setCircularScrollingGestureEnabled(true);
+        mWearableRecyclerView.setBezelFraction(0.5f);
+        mWearableRecyclerView.setScrollDegreesPerScreen(90);
 
         return mView;
     }
@@ -82,11 +107,17 @@ public class AppListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mController = new Controller(context) ;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        mController = null ;
     }
+
+
+
 
 }

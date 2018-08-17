@@ -14,14 +14,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.tnt.watchhome.Constants.Constants;
 import com.tnt.watchhome.R;
+import com.tnt.watchhome.ui.fragment.WatchFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
@@ -31,11 +36,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * TODO: document your custom view class.
  */
-public class CustomWatchFace extends View {
+public class CustomWatchFace extends View implements View.OnTouchListener{
     private static final  String TAG = "watchface";
     private static final int HANDLER_EVENT_UPDATE_TIME = 1;
     private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.SECONDS.toMillis(1);
 
+    private static final int DISTANCE = 20 ;
+
+    private Context mContext ;
 
     private Drawable mDial ;
     private Drawable mHourHand ;
@@ -75,32 +83,38 @@ public class CustomWatchFace extends View {
     private Boolean mTickerStop ;
 
     private  UpdateTimeHandler mUpdateTimeHandler ;
+    private GestureDetector mGestureDetector ;
+    private WatchFragment mFragemnt ;
 
 
     public CustomWatchFace(Context context) {
         super(context);
-        initAttrs(context,null,0,0);
+        mContext = context ;
+        initAttrs(context,null,0);
     }
 
     public CustomWatchFace(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initAttrs(context,attrs,0,0);
+        mContext = context ;
+        initAttrs(context,attrs,0);
         initValue();
     }
 
     public CustomWatchFace(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAttrs(context,attrs,0,0);
+        mContext = context ;
+        initAttrs(context,attrs,0);
         initValue();
     }
 
     public CustomWatchFace(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initAttrs(context,attrs,0,0);
+        mContext = context ;
+        initAttrs(context,attrs,0);
         initValue() ;
     }
 
-    private void initAttrs(Context context,AttributeSet attrs,int defStyleAttr,int defStyleRes) {
+    private void initAttrs(Context context,AttributeSet attrs,int defStyleAttr) {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.CustomeWatch);
         mDial = typedArray.getDrawable(R.styleable.CustomeWatch_dial);
@@ -140,8 +154,11 @@ public class CustomWatchFace extends View {
         mCalendar = Calendar.getInstance() ;
         mUpdateTimeHandler = new UpdateTimeHandler(this);
 
+        mGestureDetector = new GestureDetector(mContext,new GestureListener(),null);
 
-
+    }
+    public void setFragment(Fragment fragment) {
+        mFragemnt = (WatchFragment) fragment ;
     }
 
 
@@ -208,9 +225,10 @@ public class CustomWatchFace extends View {
         updateTimer();
     }
 
+
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+    public boolean performClick() {
+        return super.performClick();
     }
 
     @Override
@@ -218,7 +236,8 @@ public class CustomWatchFace extends View {
         super.onDraw(canvas);
 //        Log.i(TAG,"onDraw") ;
 
-        canvas.drawBitmap(mBackgroundBitmap, 0, 0, mBackgroundPaint);
+       // canvas.drawBitmap(mBackgroundBitmap, 0, 0, mBackgroundPaint);
+        drawDial(canvas) ;
         drawDateWeek(canvas);
 
        // canvas.rotate(mHour / 12.0F * 360.0F, mWidth/2, mHeight/2);
@@ -240,11 +259,24 @@ public class CustomWatchFace extends View {
         mTextPaint.setTypeface(font);
         mTextPaint.setTextSkewX(-0.5f);
         mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(20);
 
         float len = mTextPaint.measureText(mDate);
         canvas.drawText(mDate,mWidth/2- (int)(len/2),mHeight/2-(int)(mHeight/2*0.6),mTextPaint);
 
         canvas.restore();
+
+    }
+
+    private void drawDial(Canvas canvas) {
+        canvas.save() ;
+        int dialCircleWidth = mDial.getIntrinsicWidth() ;
+        int dialCircleHeight = mDial.getIntrinsicHeight() ;
+        //canvas.scale(mScale,mScale,mWidth/2,mHeight/2);
+        mDial.setBounds(0,0,mWidth,mHeight);
+        mDial.draw(canvas);
+        canvas.restore();
+
 
     }
 
@@ -258,7 +290,7 @@ public class CustomWatchFace extends View {
         canvas.rotate(mHourRotateDegrees,mWidth/2,mHeight/2);
         mHourHand.setBounds(mWidth/2-hourHandwidth/2 ,(int)(mHeight/2-mHeight/2*0.8),
                 mWidth/2+hourHandwidth/2,(int)(mHeight / 2 +  mHeight/2f*0.25f)) ;
-        //canvas.scale(mScale,mScale,mWidth/2,mHeight/2);
+        canvas.scale(mScale,mScale,mWidth/2,mHeight/2);
         mHourHand.draw(canvas);
         canvas.restore();
 
@@ -269,8 +301,8 @@ public class CustomWatchFace extends View {
         //int minuteHandHeight = mMinHand.getIntrinsicHeight();
         canvas.rotate(mMinuRotateDegrees,mWidth/2,mHeight/2);
         canvas.scale(mScale,mScale,mWidth/2,mHeight/2);
-        mMinHand.setBounds(mWidth/2 -minuteHandWidth/2,(int)(mHeight/2-mHeight/2*0.98),
-                mWidth/2+minuteHandWidth/2,(int)(mHeight/2+mHeight/2 *0.15f));
+        mMinHand.setBounds(mWidth/2 -minuteHandWidth/2,(int)(mHeight/2-mHeight/2*0.80),
+                mWidth/2+minuteHandWidth/2,(int)(mHeight/2+mHeight/2 *0.12f));
         mMinHand.draw(canvas);
         canvas.restore();
 
@@ -283,8 +315,8 @@ public class CustomWatchFace extends View {
         //int secondHandHeight = mSecondHand.getIntrinsicHeight();
         canvas.rotate(mSecondRotateDegrees,mWidth/2,mHeight/2);
         canvas.scale(mScale,mScale,mWidth/2,mHeight/2);
-        mSecondHand.setBounds(mWidth/2-secondHandWidth/2,(int)(mHeight/2-mHeight/2*0.99f),
-                mWidth/2+secondHandWidth/2,(int)(mHeight/2+mHeight/2*0.3f));
+        mSecondHand.setBounds(mWidth/2-secondHandWidth/2,(int)(mHeight/2-mHeight/2*0.9f),
+                mWidth/2+secondHandWidth/2,(int)(mHeight/2+mHeight/2*0.2f));
         mSecondHand.draw(canvas);
         canvas.restore();
 
@@ -309,12 +341,84 @@ public class CustomWatchFace extends View {
     }
 
 
+
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        mGestureDetector.onTouchEvent(event) ;
+
+        return true ; //super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.i(TAG,"onTouch") ;
+        return false;
+    }
+
+    class GestureListener implements GestureDetector.OnGestureListener{
+
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            Log.i(TAG,"onDown ") ;
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            Log.i(TAG,"onScroll distanceX = "+distanceX +"       distanceY = "+distanceY) ;
+            float y1 ,y2   ;
+            y1 = e1.getY() ;
+            y2 = e2.getY() ;
+
+            int direction = 0 ;
+
+            if (y1 - y2 > DISTANCE) {
+                Log.i(TAG,"up=========") ;
+                direction = Constants.SCROOL_UP ;
+            }else if(y2 -y1 > 20) {
+                Log.i(TAG,"down =========") ;
+                direction = Constants.SCROOL_DOWN ;
+            }
+            //mFragemnt.setDirection(direction);
+
+            return true ;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Log.i(TAG,"onFling e1 = "+e1.toString() +"       e2 = "+e2.toString()) ;
+            return false;
+        }
+    }
+
+
+
+
     static class UpdateTimeHandler extends Handler{
 
         private WeakReference<CustomWatchFace> mCustomWactchFace ;
 
-        public UpdateTimeHandler(CustomWatchFace watchFace){
-            mCustomWactchFace = new WeakReference<CustomWatchFace>(watchFace);
+        private UpdateTimeHandler(CustomWatchFace watchFace){
+            mCustomWactchFace = new WeakReference<>(watchFace);
         }
 
         @Override
@@ -329,7 +433,7 @@ public class CustomWatchFace extends View {
                     long delayMs =INTERACTIVE_UPDATE_RATE_MS
                             - (timeMs % INTERACTIVE_UPDATE_RATE_MS);
 //                    Log.i(TAG,"delayMs = "+delayMs) ;
-                    sendEmptyMessageDelayed(watchFace.HANDLER_EVENT_UPDATE_TIME,delayMs);
+                    sendEmptyMessageDelayed(CustomWatchFace.HANDLER_EVENT_UPDATE_TIME,delayMs);
 
                 }
 
@@ -397,9 +501,13 @@ public class CustomWatchFace extends View {
         int [] width_height = new int[2];
         WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics() ;
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        width_height[0] = displayMetrics.widthPixels ;
-        width_height[1] = displayMetrics.heightPixels ;
+        Display display = windowManager.getDefaultDisplay();
+
+        if (null != display) {
+            display.getMetrics(displayMetrics);
+            width_height[0] = displayMetrics.widthPixels;
+            width_height[1] = displayMetrics.heightPixels;
+        }
         Log.i(TAG,"width = "+width_height[0]+" height = "+width_height[1]) ;
         return width_height ;
     }
