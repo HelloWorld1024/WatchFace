@@ -37,30 +37,22 @@ public class AppListFragment extends Fragment {
     private WearableLinearLayoutManager mWearLinearLayoutManager ;
 
     private static final List<AppItem> mAppItems= new ArrayList<AppItem>();
+    static final int[] resImage={R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard
+            ,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard} ;
 
+    private  static final int[] textTitle ={R.string.app_sport_name,R.string.app_phone_name,R.string.app_mms_name,R.string.app_music_name,R.string.app_setpcount_name,
+            R.string.app_heartrate,R.string.app_sleep_name,R.string.app_map_name,R.string.app_weather_name,R.string.app_tools_name,R.string.app_settings_name};
 
-
-    private int initData() {
-        int len  = mAppItems.size() ;
-        for (int i =0 ; i< len; i++) {
-            mAppItems.remove(i);
-        }
-        int resImage[]={R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard
-        ,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard} ;
-
-
-        int textTitle[] ={R.string.app_sport_name,R.string.app_phone_name,R.string.app_mms_name,R.string.app_music_name,R.string.app_setpcount_name,
-        R.string.app_heartrate,R.string.app_sleep_name,R.string.app_map_name,R.string.app_weather_name,R.string.app_tools_name,R.string.app_settings_name};
-
-        Log.i(TAG,"image len = "+resImage.length + "text len ="+textTitle.length) ;
-
+    static {
         if (resImage.length == textTitle.length) {
             for (int i = 0 ; i < resImage.length;i++) {
                 AppItem appItem = new AppItem(resImage[i],textTitle[i]);
                 mAppItems.add(appItem);
             }
         }
-
+    }
+    private int initData() {
+        Log.i(TAG,"image len = "+resImage.length + "text len ="+textTitle.length) ;
         mAdapter = new WearRecyclerViewAdapter(mAppItems,mController) ;
         return 0 ;
     }

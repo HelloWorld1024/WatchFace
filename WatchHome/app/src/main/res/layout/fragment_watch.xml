@@ -8,6 +8,7 @@
     <com.tnt.watchhome.widget.BoxInsetLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         >
         <com.tnt.watchhome.ui.view.CustomWatchFace
             android:id="@+id/watch_face"
