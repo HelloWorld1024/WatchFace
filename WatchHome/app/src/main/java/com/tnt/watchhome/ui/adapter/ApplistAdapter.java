@@ -1,5 +1,4 @@
 package com.tnt.watchhome.ui.adapter;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tnt.watchhome.Bean.AppItem;
+import com.tnt.watchhome.Bean.AppInfo;
 import com.tnt.watchhome.R;
 
 import java.util.List;
@@ -18,10 +16,10 @@ import java.util.List;
 public class ApplistAdapter extends BaseAdapter {
     private static final String TAG = "watch";
 
-    private List<AppItem> mListData ;
+    private List<AppInfo> mListData ;
 
 
-    public ApplistAdapter(List<AppItem> list){
+    public ApplistAdapter(List<AppInfo> list){
         mListData = list ;
 
     }
@@ -58,9 +56,10 @@ public class ApplistAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag() ;
             Log.i(TAG,"holer = "+holder) ;
         }
-        AppItem item  = mListData.get(position);
-        holder.image.setImageResource(item.getImageId());
-        holder.textView.setText(item.getAppTitleId());
+        AppInfo item  = mListData.get(position);
+        holder.image.setImageDrawable(item.getAdrawable());
+        holder.textView.setText(item.getAppName());
+
         holder.textView.setVisibility(View.VISIBLE);
         holder.image.setVisibility(View.VISIBLE);
 

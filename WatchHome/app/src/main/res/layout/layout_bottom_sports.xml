@@ -3,36 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark"
+    android:background="@drawable/bg_run_play"
     android:layout_gravity="bottom"
-    android:padding="15dp"
     >
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
-        app:boxedEdges="0x0F"
         >
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textSize="45sp"
+        android:textColor="@color/text_color_default"
+        android:text="@string/b_rs_no_data"
+        />
 
         <ImageButton
-            android:background="@android:color/holo_green_dark"
-            android:layout_gravity="top|left"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/start_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:foregroundGravity="bottom"
+            android:background="@drawable/btn_control_single_green_big"
             />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_control_sports_play"/>
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left|center_vertical"
-            android:background="@android:color/holo_green_dark" />
-        <ImageButton
-            android:background="@android:color/holo_green_dark"
-            android:layout_gravity="left|bottom"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            />
+
+
     </FrameLayout>
+
+
 
 
 

@@ -11,7 +11,6 @@
     <string name="application_name">Application name</string>
     <string name="app_sport_name">Sport</string>
     <string name="app_phone_name">Phone</string>
-    <string name="app_mms_name">Mms</string>
     <string name="app_music_name">Music</string>
     <string name="app_setpcount_name">StepCount</string>
     <string name="app_heartrate">HeartRate</string>
@@ -20,6 +19,91 @@
     <string name="app_weather_name">Weather</string>
     <string name="app_tools_name">Tools</string>
     <string name="app_settings_name">Settings</string>
+
+    <string name="dp_day">d</string>
+    <string name="dp_month">m</string>
+    <string name="dp_year">y</string>
+    <string name="choose_view_male">male</string>
+    <string name="choose_view_female">female</string>
+    <string name="choose_view_or">or</string>
+    <string name="head">head</string>
+    <string name="demo_center">demo center</string>
+    <string name="app_id">57a9520d</string>
+    <string name="denied_required_permission">denied required permissions</string>
+    <string name="str_recognize">being recognized</string>
+    <string name="str_recognize_unclear">Recognition failed. Please speak again</string>
+    <string name="str_recognize_fail">"Please click the button
+and speak again"</string>
+    <string name="action_settings">Settings</string>
+    <string name="pref_key_iat_show">iat_show</string>
+    <string name="pref_title_iat_show">Dictation page displayed</string>
+    <string name="welcome_text">"Hello,
+how can I help you?"</string>
+    <string name="str_no_app_found">No match found</string>
+    <string name="str_understand_error">Recognition incorrect</string>
+    <string name="str_no_network">"No network
+current smart voice unavailable"</string>
+    <string name="action_open">open</string>
+    <string name="app_mms_name">Messaging</string>
+    <string name="tts_toast_format" formatted="false">Current buffer progress is%d%%，Current play progress is%d%%</string>
+    <string name="right_launcher_tools">Tools</string>
+    <string name="empty_shade_text">No notifications</string>
+    <string name="clear_notification_text">Clear notification</string>
+    <string name="notification_hidden_text">Contents hidden</string>
+    <string name="battery_meter_format">%d%%</string>
+    <string name="title_distance">Distance</string>
+    <string name="title_calorie">Calorie</string>
+    <string name="string_sport_type">sports type</string>
+    <string name="string_no_item">No Item.</string>
+    <string name="string_climbing">Climb</string>
+    <string name="string_default_num">0</string>
+    <string name="b_rs_calorie">Calorie: %dKcal</string>
+    <string name="b_rs_speed_unit">km/h</string>
+    <string name="b_rs_time">Time</string>
+    <string name="b_rs_distance">Distance</string>
+    <string name="b_rs_distance_unit_m"> m</string>
+    <string name="b_rs_distance_unit_km"> km</string>
+    <string name="b_rs_calorie_unit"> Kcal</string>
+    <string name="b_rs_height_max">overall rise</string>
+    <string name="b_rs_height_min">overall fall</string>
+    <string name="b_rs_no_data">start sport</string>
+    <string name="b_sc_step_current_unit">step</string>
+    <string name="b_sc_step_target">target: %d</string>
+    <string name="b_sc_calorie">Calorie</string>
+    <string name="launcher_package_name">com.qualcomm.qti.watchhome</string>
+    <string name="hmctclock_package_name">com.android.mltcode.ferace.watchface_1</string>
+    <string name="hmctclock_class_name">com.android.mltcode.ferace.watchface_1.FeraceWatchFaceService</string>
+    <string name="sim_pin_ok">OK</string>
+    <string name="sim_pin_title">SIM PIN</string>
+    <string name="sim_pin_dialog_title">SIM PIN</string>
+    <string name="kg_sim_pin_instructions">Enter SIM PIN</string>
+    <string name="kg_sim_pin_instructions_multi">Enter SIM PIN for \"%1$s\"</string>
+    <string name="kg_puk_enter_puk_hint">SIM is now disabled. Enter PUK code to continue. Contact carrier for details.</string>
+    <string name="kg_puk_enter_puk_hint_multi">SIM \"%1$s\" is now disabled. Enter PUK code to continue. Contact carrier for details.</string>
+    <string name="kg_puk_enter_pin_hint">Enter desired PIN code</string>
+    <string name="kg_enter_confirm_pin_hint">Confirm desired PIN code</string>
+    <string name="kg_sim_unlock_progress_dialog_message">Unlocking SIM card…</string>
+    <string name="kg_invalid_sim_pin_hint">Type a PIN that is 4 to 8 numbers.</string>
+    <string name="kg_invalid_sim_puk_hint">PUK code should be 8 numbers or more.</string>
+    <string name="kg_invalid_puk">Re-enter the correct PUK code. Repeated attempts will permanently disable the SIM.</string>
+    <string name="kg_invalid_confirm_pin_hint">PIN codes does not match</string>
+    <string name="keyguard_sim_unlock_progress_dialog_message">Unlocking SIM card…</string>
+    <string name="kg_password_wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
+    <string name="kg_password_wrong_puk_code_dead">SIM is unusable. Contact your carrier.</string>
+    <string name="kg_password_pin_failed">SIM PIN operation failed!</string>
+    <string name="kg_password_puk_failed">SIM PUK operation failed!</string>
+    <string name="kg_pin_accepted">Code Accepted!</string>
+    <string name="accessibility_notification_dismissed">Notification dismissed.</string>
+    <string name="accessibility_remove_notification">Clear notification.</string>
+    <string name="media_projection_dialog_text">"%s will start capturing everything that's displayed on your screen."</string>
+    <string name="media_projection_action_text">Start now</string>
+    <string name="media_projection_remember_text">"Don't show again"</string>
+    <string name="ji_bu">计步</string>
+    <string name="no_music">no music</string>
+    <string name="artists_title">Artists</string>
+    <string name="tracks_title">Songs</string>
+    <string name="no_contacts_found">No contacts found</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

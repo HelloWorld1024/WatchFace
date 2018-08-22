@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tnt.watchhome.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.TopMusicFragment"
+    android:background="@drawable/bg_voice"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_gravity="center"
+            android:id="@+id/media_play_zone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+                <RelativeLayout
+                    android:id="@+id/media_text_zone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+                    <TextView
+                        android:textSize="28.0sp"
+                        android:textColor="#ffffdba7"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/song_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tracks_title"
+                        android:singleLine="true" />
+                    <TextView
+                        android:textSize="22.0sp"
+                        android:textColor="#ffffdba7"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/songer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2.0dip"
+                        android:text="@string/artists_title"
+                        android:singleLine="true"
+                        android:layout_below="@id/song_name" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/button_prev"
+                android:background="@drawable/music_background_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/music_last"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" />
+            <ImageButton
+                android:id="@+id/button_next"
+                android:background="@drawable/music_background_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:src="@drawable/music_next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/voice_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:foregroundGravity="bottom"
+            android:background="@drawable/btn_control_single_yellow_big"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/music_stop"/>
+
+
+
+    </FrameLayout>
+
+
+
+
+</com.tnt.watchhome.widget.BoxInsetLayout>

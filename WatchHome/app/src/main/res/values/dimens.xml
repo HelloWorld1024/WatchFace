@@ -9,4 +9,63 @@
     <dimen name="header_end_padding">22dp</dimen>
     <dimen name="list_start_padding">36dp</dimen>
     <dimen name="list_end_padding">22dp</dimen>
+
+
+
+    <item type="dimen" name="dialog_min_width_minor">100.0%</item>
+    <item type="dimen" name="dialog_max_width_menu">50.0%</item>
+    <dimen name="card_content_padding_rect_left">4.0dip</dimen>
+    <dimen name="card_content_padding_rect_right">4.0dip</dimen>
+    <dimen name="card_content_padding_rect_top">16.0dip</dimen>
+    <dimen name="close_button_diameter">104.0dip</dimen>
+    <dimen name="dismiss_padding">16.0dip</dimen>
+    <dimen name="activity_horizontal_margin">16.0dip</dimen>
+    <dimen name="activity_vertical_margin">16.0dip</dimen>
+    <dimen name="analog_clock_margin_top">40.0dip</dimen>
+    <dimen name="activity_padding">10.0dip</dimen>
+    <dimen name="grid_column_width">90.0dip</dimen>
+    <dimen name="grid_vertical_spacing">20.0dip</dimen>
+    <dimen name="grid_horizontal_spacing">10.0dip</dimen>
+    <dimen name="grid_image_width">84.0px</dimen>
+    <dimen name="right_lv_item_height">84.0px</dimen>
+    <dimen name="grid_image_padding">5.0dip</dimen>
+    <dimen name="grid_text_height">35.0dip</dimen>
+    <dimen name="right_lv_item_text_size">30.0sp</dimen>
+    <dimen name="default_settings_circle_radius">18.0dip</dimen>
+    <dimen name="selected_settings_circle_radius">24.0dip</dimen>
+    <dimen name="round_side_inset">32.0dip</dimen>
+    <dimen name="notification_material_rounded_rect_radius">2.0dip</dimen>
+    <dimen name="clear_all_padding_top">12.0dip</dimen>
+    <dimen name="go_to_full_shade_appearing_translation">200.0dip</dimen>
+    <dimen name="notification_side_padding">0.0dip</dimen>
+    <dimen name="notification_min_height">64.0dip</dimen>
+    <dimen name="notification_max_height">256.0dip</dimen>
+    <dimen name="notification_divider_height">2.0dip</dimen>
+    <dimen name="notification_mid_height">128.0dip</dimen>
+    <item type="dimen" name="status_bar_icon_size">18dp</item>
+    <dimen name="status_bar_icon_drawing_size">17.0dip</dimen>
+    <dimen name="swipe_helper_falsing_threshold">70.0dip</dimen>
+    <dimen name="match_parent">-1.0px</dimen>
+    <item type="dimen" name="notification_panel_width">@dimen/match_parent</item>
+    <dimen name="blinds_pop_threshold">32.0dip</dimen>
+    <dimen name="pull_span_min">25.0dip</dimen>
+    <dimen name="notification_bottom_decor_height">48.0dip</dimen>
+    <dimen name="heads_up_window_height">404.0dip</dimen>
+    <dimen name="default_circle_indicator_radius">3.0dip</dimen>
+    <dimen name="default_circle_indicator_stroke_width">1.0dip</dimen>
+    <dimen name="default_line_indicator_line_width">12.0dip</dimen>
+    <dimen name="default_line_indicator_gap_width">4.0dip</dimen>
+    <dimen name="default_line_indicator_stroke_width">1.0dip</dimen>
+    <dimen name="default_title_indicator_clip_padding">4.0dip</dimen>
+    <dimen name="default_title_indicator_footer_line_height">2.0dip</dimen>
+    <dimen name="default_title_indicator_footer_indicator_height">4.0dip</dimen>
+    <dimen name="default_title_indicator_footer_indicator_underline_padding">20.0dip</dimen>
+    <dimen name="default_title_indicator_footer_padding">7.0dip</dimen>
+    <dimen name="default_title_indicator_text_size">15.0dip</dimen>
+    <dimen name="default_title_indicator_title_padding">5.0dip</dimen>
+    <dimen name="default_title_indicator_top_padding">7.0dip</dimen>
+
+
+
+
 </resources>

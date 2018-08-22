@@ -1,6 +1,9 @@
 package com.tnt.watchhome.ui.fragment;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tnt.watchhome.Bean.AppItem;
+import com.tnt.watchhome.Bean.AppInfo;
 import com.tnt.watchhome.R;
 import com.tnt.watchhome.contorl.Controller;
 import com.tnt.watchhome.ui.adapter.WearRecyclerViewAdapter;
@@ -36,24 +39,9 @@ public class AppListFragment extends Fragment {
 
     private WearableLinearLayoutManager mWearLinearLayoutManager ;
 
-    private static final List<AppItem> mAppItems= new ArrayList<AppItem>();
-    static final int[] resImage={R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard
-            ,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard,R.drawable.bg_watcherboard} ;
 
-    private  static final int[] textTitle ={R.string.app_sport_name,R.string.app_phone_name,R.string.app_mms_name,R.string.app_music_name,R.string.app_setpcount_name,
-            R.string.app_heartrate,R.string.app_sleep_name,R.string.app_map_name,R.string.app_weather_name,R.string.app_tools_name,R.string.app_settings_name};
-
-    static {
-        if (resImage.length == textTitle.length) {
-            for (int i = 0 ; i < resImage.length;i++) {
-                AppItem appItem = new AppItem(resImage[i],textTitle[i]);
-                mAppItems.add(appItem);
-            }
-        }
-    }
     private int initData() {
-        Log.i(TAG,"image len = "+resImage.length + "text len ="+textTitle.length) ;
-        mAdapter = new WearRecyclerViewAdapter(mAppItems,mController) ;
+        mAdapter = new WearRecyclerViewAdapter(getAppInfos(),mController) ;
         return 0 ;
     }
 
@@ -107,6 +95,25 @@ public class AppListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mController = null ;
+    }
+
+    public List<AppInfo> getAppInfos(){
+        PackageManager pm = getActivity().getPackageManager();
+        List<PackageInfo>  packgeInfos = pm.getInstalledPackages(PackageManager.MATCH_SYSTEM_ONLY);
+        List<AppInfo>  appInfos = new ArrayList<AppInfo>();
+
+    	/* 获取应用程序的名称，不是包名，而是清单文件中的labelname
+			String str_name = packageInfo.applicationInfo.loadLabel(pm).toString();
+			appInfo.setAppName(str_name);
+    	 */
+        for(PackageInfo packageInfo : packgeInfos){
+            String appName = packageInfo.applicationInfo.loadLabel(pm).toString();
+            String packageName = packageInfo.packageName;
+            Drawable drawable = packageInfo.applicationInfo.loadIcon(pm);
+            AppInfo appInfo = new AppInfo(appName, packageName,drawable);
+            appInfos.add(appInfo);
+        }
+        return appInfos;
     }
 
 

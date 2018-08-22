@@ -17,7 +17,6 @@ import com.tnt.watchhome.Constants.Constants;
 import com.tnt.watchhome.R;
 import com.tnt.watchhome.ui.adapter.ViewPagerFragmentAdapter;
 import com.tnt.watchhome.ui.fragment.AppListFragment;
-import com.tnt.watchhome.ui.fragment.TopFragment;
 import com.tnt.watchhome.ui.fragment.VoiceAssistantFragment;
 import com.tnt.watchhome.ui.fragment.WatchFragment;
 import com.tnt.watchhome.widget.HomeDrawerLayout;
@@ -26,8 +25,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements WatchFragment.OnFragmentInteractionListener
-        ,TopFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements WatchFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "watchface";
 
@@ -37,26 +35,11 @@ public class MainActivity extends AppCompatActivity implements WatchFragment.OnF
     private WatchFragment mWatchFragment ;
 
 
-
-    private View mTopContainer ;
-    private View mBottomContainer ;
-
     private FragmentManager mFragmentManager ;
     private ViewPagerFragmentAdapter mPagerAdapter ;
     private VoiceAssistantFragment mVoiceAssistanFragment;
-
-    private HomeDrawerLayout mDrawerLayout ;
-
     private UpdateHandler mUpdateHandler ;
-
-
     private List<Fragment> mFragmentList = new ArrayList<>() ;
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.i(TAG,"top interaction") ;
-
-    }
 
 
     static class UpdateHandler extends Handler {

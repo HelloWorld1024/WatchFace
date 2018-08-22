@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tnt.watchhome.Bean.AppItem;
+import com.tnt.watchhome.Bean.AppInfo;
 import com.tnt.watchhome.R;
 import com.tnt.watchhome.contorl.Controller;
 import com.tnt.watchhome.widget.WearableRecyclerView;
@@ -16,19 +16,19 @@ import java.util.List;
 
 public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearRecyclerViewAdapter.ViewHolder>{
 
-    private List<AppItem> mListData ;
+    private List<AppInfo> mListData ;
 
     private View mView ;
     private Controller mController ;
 
 
 
-    public WearRecyclerViewAdapter(List<AppItem> data , Controller controller) {
+    public WearRecyclerViewAdapter(List<AppInfo> data , Controller controller) {
         mListData = data ;
         mController = controller ;
     }
 
-    public void updateData(List<AppItem> data) {
+    public void updateData(List<AppInfo> data) {
         this.mListData = data ;
         notifyDataSetChanged();
 
@@ -49,11 +49,11 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (null == mListData)return ;
-        AppItem appItem = mListData.get(position);
-        if (null == appItem) return ;
+        AppInfo appInfo = mListData.get(position);
+        if (null == appInfo) return ;
 
-        holder.iconView.setImageResource(appItem.getImageId());
-        holder.textView.setText(appItem.getAppTitleId());
+        holder.iconView.setImageDrawable(appInfo.getAdrawable());
+        holder.textView.setText(appInfo.getAppName());
         holder.iconView.setTag(position);
         holder.textView.setTag(position);
 

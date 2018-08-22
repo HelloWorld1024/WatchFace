@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tnt.watchhome.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.TopNotificationFragment"
+    android:background="@drawable/bg_voice"
+    android:padding="15dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:boxedEdges="0x0F">
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:src="@drawable/null_notification_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="@string/empty_shade_text"
+            android:textSize="28sp"
+            android:textColor="@color/text_color_default"/>
+
+
+    </FrameLayout>
+
+
+
+</com.tnt.watchhome.widget.BoxInsetLayout>

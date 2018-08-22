@@ -4,13 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lwj.widget.viewpagerindicator.ViewPagerIndicator;
 import com.tnt.watchhome.R;
+import com.tnt.watchhome.ui.adapter.ViewPagerFragmentAdapter;
 import com.tnt.watchhome.ui.view.CustomWatchFace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,7 @@ public class WatchFragment extends Fragment {
 
 
 
+
     // TODO: Rename and change types of parameters
     private int  mPage;
     private String mTitle;
@@ -36,11 +44,21 @@ public class WatchFragment extends Fragment {
 
     private View mView ;
 
-    private Activity mActivity ;
+    private ViewPager mTopViewPager ;
+    private ViewPagerIndicator mViewPagerIndicator ;
 
     private OnFragmentInteractionListener mListener;
 
-    private GestureDetector mGestureDetector ;
+
+    private QuickSettingsFragment mQuickSettingsFragment ;
+    private TopMusicFragment mTopMusicFragment ;
+    private TopNotificationFragment mTopNotificationFragment ;
+    private List<Fragment> mTopFragmentsList = new ArrayList<>() ; ;
+
+    private ViewPagerFragmentAdapter mFragmentAdapter ;
+
+    private FragmentManager mFragmentManger ;
+
     private int mScrollDirection ;
 
     public WatchFragment() {
@@ -68,6 +86,9 @@ public class WatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initFragments() ;
+        mFragmentManger = getChildFragmentManager() ;
+        mFragmentAdapter = new ViewPagerFragmentAdapter(getChildFragmentManager(),mTopFragmentsList) ;
         if (getArguments() != null) {
             mPage = getArguments().getInt(ARG_PAGE);
             mTitle = getArguments().getString(ARG_TITLE);
@@ -79,13 +100,18 @@ public class WatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        if (null == mView) {
             mView = inflater.inflate(R.layout.fragment_watch, container, false);
             mWatch = mView.findViewById(R.id.watch_face) ;
-            mWatch.setFragment(this);
-        }
+            //mWatch.setFragment(this);
+            mTopViewPager = mView.findViewById(R.id.top_viewpager) ;
+            mViewPagerIndicator = mView.findViewById(R.id.view_pager_indicator) ;
+            mTopViewPager.setAdapter(mFragmentAdapter);
+            mTopViewPager.setCurrentItem(1);
+            mViewPagerIndicator.setViewPager(mTopViewPager) ;
         return mView ;
     }
+
+
 
 
 
@@ -106,18 +132,21 @@ public class WatchFragment extends Fragment {
         mListener = null;
     }
 
+    private void initFragments() {
+        mQuickSettingsFragment = new QuickSettingsFragment() ;
+        mTopMusicFragment = new TopMusicFragment() ;
+        mTopNotificationFragment = new TopNotificationFragment() ;
+
+        mTopFragmentsList.add(mTopMusicFragment) ;
+        mTopFragmentsList.add(mQuickSettingsFragment) ;
+        mTopFragmentsList.add(mTopNotificationFragment);
+
+    }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(int gestureDirection);

@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             />
     </com.tnt.watchhome.widget.BoxInsetLayout>
-    <include layout="@layout/layout_top_settings"/>
+    <include layout="@layout/top_main"/>
 
     <include layout="@layout/layout_bottom_sports"/>
 

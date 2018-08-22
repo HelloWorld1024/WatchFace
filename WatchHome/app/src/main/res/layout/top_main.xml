@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tnt.watchhome.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="top"
+    android:background="@drawable/bg_hike_play">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/top_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+
+        <com.lwj.widget.viewpagerindicator.ViewPagerIndicator
+            android:id="@+id/view_pager_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="8dp"
+            android:layout_gravity="bottom"
+            app:vpi_radius="3dp"
+            android:layout_marginBottom="8dp"
+
+            />
+
+
+    </FrameLayout>
+
+</com.tnt.watchhome.widget.BoxInsetLayout>
