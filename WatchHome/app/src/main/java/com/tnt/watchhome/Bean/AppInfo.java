@@ -1,47 +1,60 @@
 package com.tnt.watchhome.Bean;
 
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 public class AppInfo {
 
-    int imageId ;
-    int appTitleId ;
 
+    String label  ;
+    String packageName ;
+    Drawable icon;
+    Intent intent;
 
+    public AppInfo(String mAppName, String mAappPackageName, Drawable mDrawable) {
+        this.label = mAppName;
+        this.packageName = mAappPackageName;
+        this.icon = mDrawable;
+    }
 
-    String mAppName ;
-    String mAappPackageName ;
-    Drawable mAdrawable ;
+    public AppInfo(String label, String packageName, Drawable icon, Intent intent){
+        this.label = label ;
+        this.packageName=packageName ;
+        this.icon = icon ;
+        this.intent = intent ;
 
-    public AppInfo(String mAppName, String mAappPackageName, Drawable mAdrawable) {
-        this.mAppName = mAppName;
-        this.mAappPackageName = mAappPackageName;
-        this.mAdrawable = mAdrawable;
+    }
+    public Intent getIntent() {
+        return intent;
+    }
+
+    public void setIntent(Intent intent) {
+        this.intent = intent;
     }
 
     public String getAppName() {
-        return mAppName;
+        return this.label;
     }
 
     public void setAppName(String mAppName) {
-        this.mAppName = mAppName;
+        this.label = mAppName;
     }
 
-    public String getAappPackageName() {
-        return mAappPackageName;
+    public String getappPackageName() {
+        return this.packageName;
     }
 
-    public void setAappPackageName(String mAappPackageName) {
-        this.mAappPackageName = mAappPackageName;
+    public void setAppPackageName(String mAappPackageName) {
+        this.packageName = mAappPackageName;
     }
 
-    public Drawable getAdrawable() {
-        return mAdrawable;
+    public Drawable getDrawable() {
+        return icon;
     }
 
-    public void setAdrawable(Drawable mAdrawable) {
-        this.mAdrawable = mAdrawable;
+    public void setDrawable(Drawable mAdrawable) {
+        this.icon = mAdrawable;
     }
 
     public AppInfo(){
@@ -52,36 +65,9 @@ public class AppInfo {
     @Override
     public String toString() {
         return "AppInfo{" +
-                "mAappPackageName='" + mAappPackageName + '\'' +
+                "mAappPackageName='" + packageName + '\'' +
                 '}';
     }
-
-
-
-
-
-    public AppInfo(int imageId, int titleId){
-        this.imageId = imageId ;
-        this.appTitleId = titleId ;
-    }
-
-    public void setImageId (int imageId) {
-        this.imageId = imageId ;
-    }
-
-    public void setAppTitleId(int appTitleId){
-        this.appTitleId = appTitleId ;
-    }
-
-    public int getImageId(){
-        return imageId ;
-    }
-
-    public int getAppTitleId(){
-        return appTitleId ;
-    }
-
-
 
 
 

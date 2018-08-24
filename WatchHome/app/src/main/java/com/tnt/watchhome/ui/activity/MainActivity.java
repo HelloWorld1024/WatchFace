@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements WatchFragment.OnF
         mFragmentList.add(mVoiceAssistanFragment);
         mFragmentList.add(mWatchFragment);
         mFragmentList.add(mAppListFragment);
-
         return  0  ;
     }
 

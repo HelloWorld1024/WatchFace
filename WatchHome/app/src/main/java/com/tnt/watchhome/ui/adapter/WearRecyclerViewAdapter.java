@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.tnt.watchhome.Bean.AppInfo;
 import com.tnt.watchhome.R;
-import com.tnt.watchhome.contorl.Controller;
 import com.tnt.watchhome.widget.WearableRecyclerView;
 
 import java.util.List;
@@ -19,13 +18,12 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
     private List<AppInfo> mListData ;
 
     private View mView ;
-    private Controller mController ;
+    private ItemClickListener mItemListener ;
 
 
-
-    public WearRecyclerViewAdapter(List<AppInfo> data , Controller controller) {
+    public WearRecyclerViewAdapter(List<AppInfo> data , ItemClickListener listener) {
         mListData = data ;
-        mController = controller ;
+        mItemListener = listener ;
     }
 
     public void updateData(List<AppInfo> data) {
@@ -42,8 +40,7 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
             //mHolder = new ViewHolder(mView) ;
             //mView.setTag(mHolder);
 
-
-        return new ViewHolder(mView);
+        return new ViewHolder(mView,mItemListener);
     }
 
     @Override
@@ -52,7 +49,7 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
         AppInfo appInfo = mListData.get(position);
         if (null == appInfo) return ;
 
-        holder.iconView.setImageDrawable(appInfo.getAdrawable());
+        holder.iconView.setImageDrawable(appInfo.getDrawable());
         holder.textView.setText(appInfo.getAppName());
         holder.iconView.setTag(position);
         holder.textView.setTag(position);
@@ -64,19 +61,31 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
         return null == mListData ? 0 : mListData.size();
     }
 
-    public static class ViewHolder extends WearableRecyclerView.ViewHolder {
+    public static class ViewHolder extends WearableRecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView iconView ;
         private TextView textView ;
+        private ItemClickListener mListener ;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view,ItemClickListener listener) {
             super(view);
+            mListener = listener ;
             iconView = view.findViewById(R.id.icon_image);
             textView = view.findViewById(R.id.app_name) ;
+            view.setOnClickListener(this);
 
         }
 
+        @Override
+        public void onClick(View v) {
+            mListener.onItemClick(v,getAdapterPosition());
+
+        }
     }
 
+
+    public interface ItemClickListener {
+        void onItemClick(View view ,int position);
+    }
 
 
 

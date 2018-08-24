@@ -1,6 +1,7 @@
 package com.tnt.watchhome.contorl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 public class Controller {
@@ -14,9 +15,10 @@ public class Controller {
     }
 
 
-    public void itemSelected(Object obj) {
+    public void itemSelected(Intent intent) {
         Log.i(TAG," item selected ") ;
-
+        if (null == mContext) return ;
+        mContext.startActivity(intent);
     }
 
 

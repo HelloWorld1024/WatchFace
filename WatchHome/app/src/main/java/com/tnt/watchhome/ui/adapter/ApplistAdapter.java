@@ -57,7 +57,7 @@ public class ApplistAdapter extends BaseAdapter {
             Log.i(TAG,"holer = "+holder) ;
         }
         AppInfo item  = mListData.get(position);
-        holder.image.setImageDrawable(item.getAdrawable());
+        holder.image.setImageDrawable(item.getDrawable());
         holder.textView.setText(item.getAppName());
 
         holder.textView.setVisibility(View.VISIBLE);
