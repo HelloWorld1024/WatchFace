@@ -12,18 +12,20 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.BatteryManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.tnt.watchhome.R;
 
 public class BatteryView extends View {
+    private static final String TAG = "BatteryView";
 
-    private int mMargin = 0;    //电池内芯与边框的距离
+    private int mMargin = 3;    //电池内芯与边框的距离
     private int mBoder = 2;     //电池外框的宽带
     private int mWidth = 70;    //总长
     private int mHeight = 40;   //总高
-    private int mHeadWidth = 6;
-    private int mHeadHeight = 10;
+    private int mHeadWidth = 0;//6;
+    private int mHeadHeight = 0;//10;
 
     private RectF mMainRect;
     private RectF mHeadRect;
@@ -38,22 +40,22 @@ public class BatteryView extends View {
     private void initView() {
         float left , top , right , bottom ;
         if (!mIsVertical) {
-        mHeadRect = new RectF(0, (mHeight - mHeadHeight)/2, mHeadWidth, (mHeight + mHeadHeight)/2);
-         left = mHeadRect.width();
-         top = mBoder;
-         right = mWidth-mBoder;
-         bottom = mHeight-mBoder;
-        mMainRect = new RectF(left, top, right, bottom);
+            mHeadRect = new RectF(0, (mHeight - mHeadHeight)/2, mHeadWidth, (mHeight + mHeadHeight)/2);
+            left = mHeadRect.width();
+            top = mBoder;
+            right = mWidth-mBoder;
+            bottom = mHeight-mBoder;
+            mMainRect = new RectF(left, top, right, bottom);
         }else {
-            mHeight = 25 ;
+            mHeight = 25 ;//电池高度
             mWidth = 15 ;
-            mHeadWidth = 3 ;
-            mHeadHeight = 15 ;
+            mHeadWidth = 8 ;
+            mHeadHeight = 3 ;
             mHeadRect = new RectF((mWidth-mHeadWidth)/2,0,(mWidth+mHeadWidth)/2,mHeadHeight) ;
 
-            left = mBoder ;
-            top = mHeadRect.top;
-            right = mWidth - mBoder;
+            left = 0 ;
+            top = mHeadHeight;
+            right = mWidth ;
             bottom = mHeadRect.bottom+mHeight ;
 
             mMainRect = new RectF(left,top,right,bottom) ;
@@ -106,24 +108,33 @@ public class BatteryView extends View {
         canvas.drawRect(mHeadRect, paint1);
 
         //画外框
+        canvas.save() ;
         paint1.setStyle(Paint.Style.STROKE);    //设置空心矩形
         paint1.setStrokeWidth(mBoder);          //设置边框宽度
-        paint1.setColor(Color.WHITE);
-        canvas.drawRoundRect(mMainRect, mRadius, mRadius, paint1);
+        paint1.setColor(Color.RED);
+        //canvas.drawRoundRect(mMainRect, mRadius, mRadius, paint1);
+        canvas.drawRect(mMainRect,paint1) ;
+        canvas.restore();
+
+
+        paint1.setStyle(Paint.Style.STROKE);    //设置空心矩形
+        paint1.setStrokeWidth(mBoder);          //设置边框宽度
+        paint1.setColor(Color.GREEN);
+        canvas.drawCircle(mWidth,mHeight,30,paint1);
 
         //画电池芯
         Paint paint = new Paint();
         if (mIsCharging) {
             paint.setColor(Color.GREEN);
         } else {
-            if (mPower < 0.1) {
+            if (mPower < 0.2) {
                 paint.setColor(Color.RED);
             } else {
                 paint.setColor(Color.WHITE);
             }
         }
 
-        int width , left,right,top,bottom ;
+        int width , left,right,top,bottom ,height ;
         Rect rect ;
         if (!mIsVertical) {
             width   = (int) (mPower * (mMainRect.width() - mMargin*2));
@@ -133,11 +144,20 @@ public class BatteryView extends View {
             bottom  = (int) (mMainRect.bottom - mMargin);
             rect = new Rect(left,top,right, bottom);
         }else {
+            height = (int)(mPower*(mMainRect.height()-mMargin*2));
             left = (int)(mMainRect.left + mMargin);
-            top = 10; //(int)(mMainRect.bottom-mMargin - mPower*(mMainRect.height()-mMargin*2));
+
+            top = (int)(mMainRect.bottom-mMargin - mPower*(mMainRect.height()-mMargin*2));
             right = (int)(mMainRect.right - mMargin) ;
-            bottom = (int)(mMainRect.bottom+mHeadRect.bottom-mMargin);
+            bottom = (int)(mMainRect.bottom-mMargin-mBoder);
             rect = new Rect(left,top,right,bottom) ;
+
+            Log.i(TAG,"mMainRect left = "+mMainRect.left + "  top = "+mMainRect.top
+            +"right = "+mMainRect.right + "  bottom="+mMainRect.bottom) ;
+
+
+
+            Log.i(TAG,"rect = left"+rect.left + "top = "+rect.top +" right = "+rect.right+"  bottom = "+rect.bottom) ;
 
         }
         canvas.drawRect(rect, paint);
