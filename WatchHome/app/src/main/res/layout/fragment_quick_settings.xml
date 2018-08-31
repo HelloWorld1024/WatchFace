@@ -59,20 +59,48 @@
         </LinearLayout>
 
 
-        <LinearLayout
-
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="5dp"
+
             >
             <ImageView
+                android:id="@+id/sim_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="130dp"
+                android:src="@drawable/no_sim"/>
+            <ImageView
+                android:id="@+id/bluteeth_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/sim_stat"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_bluetooth"/>
+
+            <com.tnt.watchhome.widget.BatteryView
+                android:id="@+id/battery_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/bluteeth_stat"
+                />
+
+            <TextView
+                android:id="@+id/battery_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@android:drawable/ic_lock_idle_low_battery"/>
+                android:layout_toRightOf="@id/battery_view"
+                android:layout_marginLeft="2dp"
+                android:textColor="@color/text_color_default"
+                android:layout_alignBottom="@id/battery_view"
+                android:textSize="18sp"
+                />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

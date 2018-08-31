@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    android:background="@drawable/bg_voice"
+    android:background="@color/black"
     tools:context=".ui.fragment.AppListFragment"
 
     app:circularScrollingGestureEnabled ="true">

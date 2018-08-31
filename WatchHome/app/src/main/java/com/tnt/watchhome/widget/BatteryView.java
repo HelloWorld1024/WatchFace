@@ -17,7 +17,7 @@ import android.view.View;
 
 import com.tnt.watchhome.R;
 
-public class BatteryView extends View {
+public class BatteryView extends View  {
     private static final String TAG = "BatteryView";
 
     private int mMargin = 3;    //电池内芯与边框的距离
@@ -31,6 +31,7 @@ public class BatteryView extends View {
     private RectF mHeadRect;
     private float mRadius = 4f;   //圆角
     private float mPower;
+
 
     private boolean mIsCharging; //是否在充电
 
@@ -47,8 +48,8 @@ public class BatteryView extends View {
             bottom = mHeight-mBoder;
             mMainRect = new RectF(left, top, right, bottom);
         }else {
-            mHeight = 25 ;//电池高度
-            mWidth = 15 ;
+            mHeight = 20 ;//电池高度
+            mWidth = 13 ;
             mHeadWidth = 8 ;
             mHeadHeight = 3 ;
             mHeadRect = new RectF((mWidth-mHeadWidth)/2,0,(mWidth+mHeadWidth)/2,mHeadHeight) ;
@@ -104,26 +105,24 @@ public class BatteryView extends View {
 
         //画电池头
         paint1.setStyle(Paint.Style.FILL);  //实心
-        paint1.setColor(Color.WHITE);
+        paint1.setColor(getResources().getColor(R.color.text_color_default,null));
         canvas.drawRect(mHeadRect, paint1);
 
         //画外框
         canvas.save() ;
         paint1.setStyle(Paint.Style.STROKE);    //设置空心矩形
         paint1.setStrokeWidth(mBoder);          //设置边框宽度
-        paint1.setColor(Color.RED);
+        paint1.setColor(getResources().getColor(R.color.text_color_default,null));
         //canvas.drawRoundRect(mMainRect, mRadius, mRadius, paint1);
         canvas.drawRect(mMainRect,paint1) ;
         canvas.restore();
 
+        canvas.save();
 
-        paint1.setStyle(Paint.Style.STROKE);    //设置空心矩形
-        paint1.setStrokeWidth(mBoder);          //设置边框宽度
-        paint1.setColor(Color.GREEN);
-        canvas.drawCircle(mWidth,mHeight,30,paint1);
 
         //画电池芯
         Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
         if (mIsCharging) {
             paint.setColor(Color.GREEN);
         } else {
@@ -146,32 +145,27 @@ public class BatteryView extends View {
         }else {
             height = (int)(mPower*(mMainRect.height()-mMargin*2));
             left = (int)(mMainRect.left + mMargin);
-
             top = (int)(mMainRect.bottom-mMargin - mPower*(mMainRect.height()-mMargin*2));
             right = (int)(mMainRect.right - mMargin) ;
             bottom = (int)(mMainRect.bottom-mMargin-mBoder);
             rect = new Rect(left,top,right,bottom) ;
 
-            Log.i(TAG,"mMainRect left = "+mMainRect.left + "  top = "+mMainRect.top
-            +"right = "+mMainRect.right + "  bottom="+mMainRect.bottom) ;
-
-
-
-            Log.i(TAG,"rect = left"+rect.left + "top = "+rect.top +" right = "+rect.right+"  bottom = "+rect.bottom) ;
-
         }
         canvas.drawRect(rect, paint);
+        canvas.restore();
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(mWidth,mHeight);
+        setMeasuredDimension(mWidth,mHeight+5);
     }
 
     private void setPower(float power) {
         mPower = power;
         invalidate();
     }
+
 
     private BroadcastReceiver mPowerConnectionReceiver = new BroadcastReceiver() {
         @Override
@@ -182,6 +176,7 @@ public class BatteryView extends View {
 
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+            Log.i(TAG,"level ="+level + " scale = "+scale) ;
 
             setPower(((float) level)/scale);
         }
@@ -198,6 +193,7 @@ public class BatteryView extends View {
         getContext().unregisterReceiver(mPowerConnectionReceiver);
         super.onDetachedFromWindow();
     }
+
 
 
 

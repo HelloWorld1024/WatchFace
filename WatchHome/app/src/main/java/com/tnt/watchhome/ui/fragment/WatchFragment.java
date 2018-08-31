@@ -1,12 +1,12 @@
 package com.tnt.watchhome.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.GestureDetector;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,22 +27,15 @@ import java.util.List;
  * Use the {@link WatchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WatchFragment extends Fragment {
+public class WatchFragment extends Fragment  {
 
     private static final String TAG = "watchFragment";
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PAGE= "arg_page";
     private static final String ARG_TITLE = "arg_title";
 
-
-
-
-    // TODO: Rename and change types of parameters
-    private int  mPage;
-    private String mTitle;
-    private CustomWatchFace mWatch ;
-
     private View mView ;
+    private View mWatchContent ;
 
     private ViewPager mTopViewPager ;
     private ViewPagerIndicator mViewPagerIndicator ;
@@ -57,7 +50,7 @@ public class WatchFragment extends Fragment {
 
     private ViewPagerFragmentAdapter mFragmentAdapter ;
 
-    private FragmentManager mFragmentManger ;
+    private  LongClickListener mWatchFaceChangeListener ;
 
     private int mScrollDirection ;
 
@@ -87,37 +80,41 @@ public class WatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initFragments() ;
-        mFragmentManger = getChildFragmentManager() ;
         mFragmentAdapter = new ViewPagerFragmentAdapter(getChildFragmentManager(),mTopFragmentsList) ;
-        if (getArguments() != null) {
-            mPage = getArguments().getInt(ARG_PAGE);
-            mTitle = getArguments().getString(ARG_TITLE);
-        }
+        mWatchFaceChangeListener = new LongClickListener() ;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i(TAG,"onCreateView===") ;
 
             mView = inflater.inflate(R.layout.fragment_watch, container, false);
-            mWatch = mView.findViewById(R.id.watch_face) ;
+            mWatchContent = mView.findViewById(R.id.watchface_content) ;
             //mWatch.setFragment(this);
             mTopViewPager = mView.findViewById(R.id.top_viewpager) ;
             mViewPagerIndicator = mView.findViewById(R.id.view_pager_indicator) ;
             mTopViewPager.setAdapter(mFragmentAdapter);
             mTopViewPager.setCurrentItem(1);
             mViewPagerIndicator.setViewPager(mTopViewPager) ;
+
         return mView ;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i(TAG,"onActivityCreated===") ;
+        mWatchContent.setOnLongClickListener(mWatchFaceChangeListener);
 
-
-
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.i(TAG,"onAttach") ;
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -143,6 +140,16 @@ public class WatchFragment extends Fragment {
 
     }
 
+    class LongClickListener implements View.OnLongClickListener {
+
+        @Override
+        public boolean onLongClick(View v) {
+            Log.i(TAG,"change watch face "+v.toString()) ;
+
+            return true;
+        }
+
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.tnt.watchhome.ui.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,13 +11,17 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
 import com.tnt.watchhome.R;
 
+import java.lang.ref.WeakReference;
 import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -25,8 +30,16 @@ import java.util.Calendar;
 public class AnologWatchFace extends View {
     private static final String TAG = "watchface";
 
+    private static final int HANDLER_EVENT_UPDATE_TIME = 1;
+    private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.SECONDS.toMillis(1);
+
     //handler what
     public final int START_CLOCK=1000;
+
+    private float mHours ;
+    private float mMinutes ;
+    private float mSeconds ;
+    private Calendar mCalendar ;
 
     //文字画笔对象
     private  Paint mTextPaint;
@@ -82,17 +95,23 @@ public class AnologWatchFace extends View {
     //控件高度
     public int mHeght;
 
+    private UpdateTimeHandler mUpdateTimeHandler ;
     public AnologWatchFace(Context context) {
         this(context,null);
+        initAttrs(context,null) ;
+        initValue() ;
     }
 
     public AnologWatchFace(Context context, AttributeSet attrs) {
         this(context, attrs,0);
+        initAttrs(context,attrs) ;
+        initValue() ;
     }
 
     public AnologWatchFace(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(context,attrs) ;
+        initValue() ;
     }
 
 
@@ -101,21 +120,27 @@ public class AnologWatchFace extends View {
         setMeasuredDimension(measureSize(widthMeasureSpec),measureSize(heightMeasureSpec));
     }
 
+    private void initValue() {
+        mCalendar=Calendar.getInstance();
+        mUpdateTimeHandler = new UpdateTimeHandler(this);
+    }
+
     private void initAttrs(Context context,AttributeSet attrs){
         TypedArray typedArray=context.obtainStyledAttributes(attrs, R.styleable.AnologWatchFace);
+        Resources res = getResources() ;
         mRadius=typedArray.getDimension(R.styleable.AnologWatchFace_mRadius,400);
         mCircleColor=typedArray.getColor(R.styleable.AnologWatchFace_mCircleColor, Color.WHITE);
         mCircleWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mCircleWidth,5);
         mTextSize=typedArray.getDimension(R.styleable.AnologWatchFace_mCircleWidth,10);
         mTextColor=typedArray.getColor(R.styleable.AnologWatchFace_mTextColor,Color.DKGRAY);
         mBigScaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mBigScaleColor,Color.BLACK);
-        mSmallScaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mSmallScaleColor,Color.RED);
+        mSmallScaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mSmallScaleColor,Color.BLACK);
         mMiddlecaleColor=typedArray.getColor(R.styleable.AnologWatchFace_mMiddlecaleColor,Color.BLACK);
         mHourHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mHourHandColor,Color.BLACK);
         mMinuteHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mMinuteHandColor,Color.BLACK);
-        mSecondHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mSecondHandColor,Color.BLACK);
-        mHourHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mHourHandWidth,20);
-        mMinuteHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mMinuteHandWidth,10);
+        mSecondHandColor=typedArray.getColor(R.styleable.AnologWatchFace_mSecondHandColor,res.getColor(R.color.colorAccent,null));
+        mHourHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mHourHandWidth,10);
+        mMinuteHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mMinuteHandWidth,7);
         mSecondHandWidth=typedArray.getDimension(R.styleable.AnologWatchFace_mSecondHandWidth,5);
 
         mPaint=new Paint();
@@ -159,8 +184,6 @@ public class AnologWatchFace extends View {
         // drawHourNumbers(canvas);
         //绘制指针
         drawPointer(canvas);
-        //发送消息刷新ui
-        handler.sendEmptyMessageDelayed(START_CLOCK,1000);
     }
 
     /**
@@ -219,7 +242,6 @@ public class AnologWatchFace extends View {
      * @param canvas
      */
     private void drawPointer(Canvas canvas) {
-        Calendar mCalendar=Calendar.getInstance();
         //获取当前小时数
         int hours = mCalendar.get(Calendar.HOUR);
         //获取当前分钟数
@@ -233,7 +255,6 @@ public class AnologWatchFace extends View {
         mPaint.setColor(mHourHandColor);
         mPaint.setStrokeWidth(mHourHandWidth);
         float y1 = mHeght / 2 - mWidth/2f*0.5f;
-        Log.i(TAG," width = "+mWidth+"  height="+mHeght+"  y1="+y1) ;
         //旋转的角度 实现原理是计算出一共多少分钟除以60计算出真实的小时数（带有小数，为了更加准确计算度数），已知12小时是360度，现在求出了实际小时数比例求出角度
         Float hoursAngle = (hours * 60 + minutes) / 60f / 12f  * 360;
         canvas.rotate(hoursAngle, mWidth / 2, mHeght / 2);
@@ -274,6 +295,15 @@ public class AnologWatchFace extends View {
 
     }
 
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility==VISIBLE){
+            mCalendar.setTimeZone(TimeZone.getDefault());
+        }
+        updateTimer();
+    }
+
     private void drawHourNumbers(Canvas canvas){
 
         for (int i =0 ; i < 12 ; i++){
@@ -286,27 +316,50 @@ public class AnologWatchFace extends View {
             canvas.rotate(30);
 
         }
-
     }
 
-    /**
-     * handler处理
-     */
-    private Handler handler=new Handler(){
+
+    private void onTimeChanged(){
+        long now = System.currentTimeMillis();
+        mCalendar.setTimeInMillis(now);
+    }
+
+    private void updateTimer() {
+        mUpdateTimeHandler.removeMessages(HANDLER_EVENT_UPDATE_TIME);
+        if (shouldTimerBeRunning()){
+            mUpdateTimeHandler.sendEmptyMessage(HANDLER_EVENT_UPDATE_TIME);
+        }
+
+    }
+    private boolean shouldTimerBeRunning() {
+        return getVisibility()== View.VISIBLE;
+    }
+
+
+
+    static class UpdateTimeHandler extends Handler{
+        private WeakReference<AnologWatchFace> mAnologWatchFace ;
+        private UpdateTimeHandler(AnologWatchFace watchFace){
+            mAnologWatchFace = new WeakReference<>(watchFace);
+        }
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case START_CLOCK:
-                    //更新时分秒
-                    invalidate();
-                    //每隔1秒更新一次
-                    handler.sendEmptyMessageDelayed(START_CLOCK,1000);
-                    break;
+            AnologWatchFace watchFace = mAnologWatchFace.get();
+            if (watchFace == null)return ;
+            if (msg.what == HANDLER_EVENT_UPDATE_TIME) {
+                watchFace.onTimeChanged() ;
+                watchFace.invalidate();
+                if (watchFace.shouldTimerBeRunning()){
+                    long timeMs = System.currentTimeMillis();
+                    long delayMs =INTERACTIVE_UPDATE_RATE_MS
+                            - (timeMs % INTERACTIVE_UPDATE_RATE_MS);
+//                    Log.i(TAG,"delayMs = "+delayMs) ;
+                    sendEmptyMessageDelayed(AnologWatchFace.HANDLER_EVENT_UPDATE_TIME,delayMs);
+                }
             }
-
+            super.handleMessage(msg);
         }
-    };
+    }
 
 
 

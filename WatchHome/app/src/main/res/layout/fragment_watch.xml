@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.tnt.watchhome.widget.HomeDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/center_watch_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.WatchFragment">
     <com.tnt.watchhome.widget.BoxInsetLayout
+        android:clickable="true"
+        android:id="@+id/watchface_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
         >
-        <com.tnt.watchhome.ui.view.CustomWatchFace
+        <!--<com.tnt.watchhome.ui.view.CustomWatchFace
             android:id="@+id/watch_face"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:mCircleColor="@android:color/darker_gray"
+            />-->
+        <com.tnt.watchhome.ui.view.AnologWatchFace
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
             />
     </com.tnt.watchhome.widget.BoxInsetLayout>
+<!--
+    <com.tnt.watchhome.ui.view.AnologWatchFace
+        app:mSecondHandColor="@color/colorAccent"
+        app:mCircleColor="@android:color/darker_gray"
+        app:mBigScaleColor="@android:color/white"
+        app:mMiddlecaleColor="@android:color/white"
+        app:mSmallScaleColor="@android:color/black"
+        app:mHourHandColor="@android:color/white"
+        app:mMinuteHandColor="@android:color/white"
+        app:mTextColor="@android:color/black"
+        app:mHourHandWidth="10dp"
+        app:mSecondHandWidth="5dp"
+        app:mMinuteHandWidth="7dp"
+        app:mTextSize="10sp"
+        android:background="@color/black"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+        -->
     <include layout="@layout/top_main"/>
 
     <include layout="@layout/layout_bottom_sports"/>

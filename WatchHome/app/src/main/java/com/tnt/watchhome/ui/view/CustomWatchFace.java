@@ -56,6 +56,7 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
     private float mHours ;
     private float mMinutes ;
     private float mSeconds ;
+    private Calendar mCalendar ;
     private String mDay ;
     private String mWeek ;
     private String mDate ;
@@ -67,7 +68,7 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
     private float mMinuRotateDegrees ;
     private float mSecondRotateDegrees ;
 
-    private Calendar mCalendar ;
+
 
 
     private int mWidth;
@@ -150,11 +151,11 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setColor(Color.BLACK);
         mTextPaint = new Paint();
-        mTextPaint.setColor(getResources().getColor(R.color.golden,null));
+        mTextPaint.setColor(getResources().getColor(R.color.text_color_default,null));
         mCalendar = Calendar.getInstance() ;
         mUpdateTimeHandler = new UpdateTimeHandler(this);
 
-        mGestureDetector = new GestureDetector(mContext,new GestureListener(),null);
+        //mGestureDetector = new GestureDetector(mContext,new GestureListener(),null);
 
     }
     public void setFragment(Fragment fragment) {
@@ -347,9 +348,9 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        mGestureDetector.onTouchEvent(event) ;
+        //mGestureDetector.onTouchEvent(event) ;
 
-        return true ; //super.onTouchEvent(event);
+        return super.onTouchEvent(event) ; //super.onTouchEvent(event);
     }
 
     @Override
@@ -395,11 +396,12 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
             }
             //mFragemnt.setDirection(direction);
 
-            return true ;
+            return false ;
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
+            Log.i(TAG,"onLongpress") ;
 
         }
 
@@ -414,13 +416,10 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
 
 
     static class UpdateTimeHandler extends Handler{
-
         private WeakReference<CustomWatchFace> mCustomWactchFace ;
-
         private UpdateTimeHandler(CustomWatchFace watchFace){
             mCustomWactchFace = new WeakReference<>(watchFace);
         }
-
         @Override
         public void handleMessage(Message msg) {
             CustomWatchFace watchFace = mCustomWactchFace.get();
@@ -434,9 +433,7 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
                             - (timeMs % INTERACTIVE_UPDATE_RATE_MS);
 //                    Log.i(TAG,"delayMs = "+delayMs) ;
                     sendEmptyMessageDelayed(CustomWatchFace.HANDLER_EVENT_UPDATE_TIME,delayMs);
-
                 }
-
             }
             super.handleMessage(msg);
         }
@@ -462,8 +459,6 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
         mWeek = String.valueOf(getDayofWeek(mCalendar.get(Calendar.DAY_OF_WEEK))) ;
 
         mDate = mDay+"  "+mWeek;
-
-//        Log.i(TAG,"hourdegree = "+mHourRotateDegrees+"  mMinuteDegreee = "+mMinuRotateDegrees+" mSecondDegree = "+mSecondRotateDegrees) ;
 
     }
     private String getDayofWeek(int weekday){

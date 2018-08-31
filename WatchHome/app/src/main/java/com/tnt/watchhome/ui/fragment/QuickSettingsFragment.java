@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,8 +21,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.tnt.watchhome.R;
+import com.tnt.watchhome.widget.BatteryView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,7 +42,14 @@ public class QuickSettingsFragment extends Fragment {
     private Button mMuteMode ;
     private Button mWifiMode ;
     private Button mNotification ;
+
+    private ImageView mSimStat ;
+    private ImageView mBlutoothStat ;
+
+    private TextView mBatteryData ;
     private QuickSettingListener listener ;
+    private BatteryView mBattery ;
+    private boolean mIsCharging ;
 
     private int mAudioMode = AudioManager.RINGER_MODE_NORMAL ;
 
@@ -102,12 +113,20 @@ public class QuickSettingsFragment extends Fragment {
         mMuteMode = view.findViewById(R.id.mute) ;
         mWifiMode = view.findViewById(R.id.wifi) ;
         mNotification = view.findViewById(R.id.notification) ;
-        if (null == listener || null == mAirPlaneMode || null == mMuteMode || null == mWifiMode || null == mNotification) return null ;
+        mBattery = view.findViewById(R.id.battery_view) ;
+        mBatteryData = view.findViewById(R.id.battery_data) ;
+
+        mSimStat = view.findViewById(R.id.sim_stat) ;
+        mBlutoothStat = view.findViewById(R.id.bluteeth_stat) ;
+
+        if (null == listener || null == mAirPlaneMode || null == mMuteMode || null == mWifiMode
+                || null == mNotification || null == mBattery || null == mBatteryData) return null ;
 
         mAirPlaneMode.setOnClickListener(listener);
         mMuteMode.setOnClickListener(listener);
         mWifiMode.setOnClickListener(listener);
         mNotification.setOnClickListener(listener);
+
         return view ;
     }
 
@@ -231,7 +250,18 @@ public class QuickSettingsFragment extends Fragment {
     public void refreshAirplane() {
         Drawable airPlaneDrawable = mIsAirplane? getResources().getDrawable(R.drawable.ic_airplanemode_on,null):
                 getResources().getDrawable(R.drawable.ic_airplanemode_off,null) ;
+        if (mIsAirplane) {
+            mSimStat.setImageResource(R.drawable.stat_sys_signal_flightmode);
+            mBlutoothStat.setVisibility(View.INVISIBLE);
+        }else {
+            mSimStat.setImageResource(R.drawable.no_sim);
+            mBlutoothStat.setVisibility(View.VISIBLE);
+        }
         mAirPlaneMode.setBackground(airPlaneDrawable);
+    }
+
+    public void updatePowerData(int power) {
+        mBatteryData.setText(power+"%");
     }
 
 
@@ -239,6 +269,7 @@ public class QuickSettingsFragment extends Fragment {
         Receiver receiver ;
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         receiver = new Receiver() ;
         mContext.registerReceiver(receiver, filter);
     }
@@ -246,19 +277,36 @@ public class QuickSettingsFragment extends Fragment {
     class Receiver extends  BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
-            switch (wifiState){
-                case WifiManager.WIFI_STATE_DISABLED:
-                    Log.i(TAG,"wifi disabled") ;
-                    refreshWifi() ;
-                    break ;
-                case WifiManager.WIFI_STATE_ENABLED:
-                    Log.i(TAG,"wifi enabled") ;
-                    refreshWifi() ;
-                    break ;
+            if (intent.getAction().equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
+                int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
+                switch (wifiState){
+                    case WifiManager.WIFI_STATE_DISABLED:
+                        Log.i(TAG,"wifi disabled") ;
+                        refreshWifi() ;
+                        break ;
+                    case WifiManager.WIFI_STATE_ENABLED:
+                        Log.i(TAG,"wifi enabled") ;
+                        refreshWifi() ;
+                        break ;
                     default:
                         break ;
+                }
+
+            }else if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
+                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+                mIsCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                        status == BatteryManager.BATTERY_STATUS_FULL;
+
+
+                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                Log.i(TAG,"level ="+level + " scale = "+scale) ;
+
+                if (level > -1) {
+                    updatePowerData(level);
+                }
             }
+
         }
     }
 
