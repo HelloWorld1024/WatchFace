@@ -92,6 +92,7 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
         super(context);
         mContext = context ;
         initAttrs(context,null,0);
+        initValue();
     }
 
     public CustomWatchFace(Context context, @Nullable AttributeSet attrs) {
@@ -148,12 +149,17 @@ public class CustomWatchFace extends View implements View.OnTouchListener{
         mScale = ((float) mWidth)/(float)mBackgroundBitmap.getWidth();
         Log.i(TAG,"initValue width = "+mWidth + "height = "+mHeight+"  mRadius = "+mRadius+" mScale = "+mScale) ;
 
+        mCalendar = Calendar.getInstance() ;
+        mUpdateTimeHandler = new UpdateTimeHandler(this);
+
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setColor(Color.BLACK);
         mTextPaint = new Paint();
         mTextPaint.setColor(getResources().getColor(R.color.text_color_default,null));
-        mCalendar = Calendar.getInstance() ;
-        mUpdateTimeHandler = new UpdateTimeHandler(this);
+
+
+
+        onTimeChanged() ;
 
         //mGestureDetector = new GestureDetector(mContext,new GestureListener(),null);
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tnt.watchhome.Bean.AppInfo;
 import com.tnt.watchhome.R;
+import com.tnt.watchhome.ui.listener.ItemClickListener;
 import com.tnt.watchhome.widget.WearableRecyclerView;
 
 import java.util.List;
@@ -82,10 +83,6 @@ public class WearRecyclerViewAdapter extends  WearableRecyclerView.Adapter<WearR
         }
     }
 
-
-    public interface ItemClickListener {
-        void onItemClick(View view ,int position);
-    }
 
 
 

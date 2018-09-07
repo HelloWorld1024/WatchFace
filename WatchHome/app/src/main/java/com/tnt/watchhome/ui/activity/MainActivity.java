@@ -1,5 +1,6 @@
 package com.tnt.watchhome.ui.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,6 +71,15 @@ public class MainActivity extends AppCompatActivity implements WatchFragment.OnF
         mUpdateHandler = new UpdateHandler(this) ;
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG,"onResume main activity === ") ;
+
+    }
+
     private void initView () {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 public class AppInfo {
-
-
     String label  ;
     String packageName ;
     Drawable icon;
@@ -58,7 +56,6 @@ public class AppInfo {
     }
 
     public AppInfo(){
-
 
     }
 

@@ -105,6 +105,6 @@ current smart voice unavailable"</string>
     <string name="no_contacts_found">No contacts found</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="watch_name_simple">Simple</string>
+    <string name="watch_name_luxury">Luxury</string>
 </resources>

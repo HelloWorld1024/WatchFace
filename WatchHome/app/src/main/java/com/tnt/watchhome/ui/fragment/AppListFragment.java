@@ -19,6 +19,7 @@ import com.tnt.watchhome.R;
 import com.tnt.watchhome.contorl.Controller;
 import com.tnt.watchhome.ui.adapter.WearRecyclerViewAdapter;
 import com.tnt.watchhome.ui.listener.CustomScrollingLayoutCallback;
+import com.tnt.watchhome.ui.listener.ItemClickListener;
 import com.tnt.watchhome.widget.WearableLinearLayoutManager;
 import com.tnt.watchhome.widget.WearableRecyclerView;
 
@@ -46,7 +47,7 @@ public class AppListFragment extends Fragment {
 
     private int initData() {
         mListAppData = getAppInfos();
-        mAdapter = new WearRecyclerViewAdapter(mListAppData, new WearRecyclerViewAdapter.ItemClickListener() {
+        mAdapter = new WearRecyclerViewAdapter(mListAppData, new ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(mListAppData.get(position).getIntent());

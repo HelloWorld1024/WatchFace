@@ -84,4 +84,11 @@
     <string name="tracks_title">歌曲</string>
     <string name="no_contacts_found">没有找到联系人</string>
     <string name="string_default_time">00:40:20</string>
+
+
+
+
+
+    <string name="watch_name_simple">简约时尚</string>
+    <string name="watch_name_luxury">低调奢华</string>
 </resources>

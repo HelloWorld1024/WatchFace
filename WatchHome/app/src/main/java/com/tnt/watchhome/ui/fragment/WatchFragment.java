@@ -1,19 +1,23 @@
 package com.tnt.watchhome.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.lwj.widget.viewpagerindicator.ViewPagerIndicator;
+import com.tnt.watchhome.Constants.Constants;
 import com.tnt.watchhome.R;
+import com.tnt.watchhome.ui.activity.WatchFaceSettingActivity;
 import com.tnt.watchhome.ui.adapter.ViewPagerFragmentAdapter;
+import com.tnt.watchhome.ui.view.AnologWatchFace;
 import com.tnt.watchhome.ui.view.CustomWatchFace;
 
 import java.util.ArrayList;
@@ -34,9 +38,13 @@ public class WatchFragment extends Fragment  {
     private static final String ARG_PAGE= "arg_page";
     private static final String ARG_TITLE = "arg_title";
 
-    private View mView ;
-    private View mWatchContent ;
 
+    private static final int REQUEST_CODE = 1000 ;
+
+
+    private ViewGroup mWatchContent ;
+
+    private View mView;
     private ViewPager mTopViewPager ;
     private ViewPagerIndicator mViewPagerIndicator ;
 
@@ -103,6 +111,32 @@ public class WatchFragment extends Fragment  {
         return mView ;
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG," watch fragment onStart===") ;
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG," watch fragment onPause===") ;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG," watch fragment onStop===") ;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG," watch fragment onResume===") ;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -145,14 +179,57 @@ public class WatchFragment extends Fragment  {
         @Override
         public boolean onLongClick(View v) {
             Log.i(TAG,"change watch face "+v.toString()) ;
+            startWatchFaceSetting() ;
 
             return true;
         }
 
     }
 
+    private void startWatchFaceSetting() {
+        Intent intent = new Intent(getActivity(), WatchFaceSettingActivity.class) ;
+        //startActivity(intent);
+        startActivityForResult(intent,REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG,"onActivityResult"+requestCode + "result code = "+resultCode+" intent = "+data.toString()) ;
+
+        if (requestCode == REQUEST_CODE && resultCode== Activity.RESULT_OK) {
+            Log.i(TAG,"intent = "+data.getStringExtra(Constants.WATCH_NAME)) ;
+            mWatchContent.removeAllViews();
+            final int id = data.getIntExtra(Constants.WATCH_ID,-1);
+            if (-1 == id)return;
+            View view =null ;
 
 
+            switch (id){
+                case Constants.WATHC_FACE_ONE:
+                    view = new AnologWatchFace(mView.getContext()) ;
+                    Log.i(TAG,"WATHC_FACE_ONE") ;
+                    break;
+                case Constants.WATCH_FACE_TWO:
+                    Log.i(TAG,"WATCH_FACE_TWO") ;
+                    view = new CustomWatchFace(mView.getContext()) ;
+                    break ;
+
+                    default:
+                        break;
+
+            }
+            if (null!= view){
+                mWatchContent.addView(view);
+
+            }
+
+
+
+
+
+        }
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
